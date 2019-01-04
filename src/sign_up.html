@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>登录/注册</title>
+    <title>注册</title>
   </head>
   <body>
     <form class="signUp">
@@ -19,6 +19,7 @@
   </body>
   <script src="../vendor/jquery.min.js"></script>
   <script src="../vendor/av-min.js"></script>
+  <script src="./js/av-init.js"></script>
   <script>
     let hash = {};
     $(".signUp").on("submit", e => {
@@ -41,7 +42,7 @@
         user.setPassword(hash["password"]);
         user.setEmail(hash["email"]);
         user.signUp().then(
-          ()=>{$.post("index").then(Response=>{$('html').html(Response)});},
+          ()=>{window.location.href = "./index";},
           (error)=>{
             alert(JSON.stringify(error["rawMessage"]))
           })
@@ -58,22 +59,15 @@
     });
 
     //////
-    var APP_ID = "JL9sJAyVgDNcqNQDX64nlc8w-gzGzoHsz";
-    var APP_KEY = "HoYerwTeo2l8m92p7ehBb4Bz";
 
-    AV.init({
-      appId: APP_ID,
-      appKey: APP_KEY
-    });
-
-    var TestObject = AV.Object.extend("TestObject");
-    var testObject = new TestObject();
-    testObject
-      .save({
-        words: "Hello World!"
-      })
-      .then(function(object) {
-        alert("LeanCloud Rocks!");
-      });
+    // var TestObject = AV.Object.extend("TestObject");
+    // var testObject = new TestObject();
+    // testObject
+    //   .save({
+    //     words: "Hello World!"
+    //   })
+    //   .then(function(object) {
+    //     alert("LeanCloud Rocks!");
+    //   });
   </script>
 </html>

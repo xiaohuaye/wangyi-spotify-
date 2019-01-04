@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="cmn-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>登录</title>
+  </head>
+  <body>
+    <form class="signIn">
+      <h2>登录</h2>
+      <label>用户邮箱<input type="text" name="email"/></label>
+      <label>密码<input type="password" name="password"/></label>
+      <input type="submit" value="提交" />
+    </form>
+  </body>
+  <script src="../vendor/jquery.min.js"></script>
+  <script src="../vendor/av-min.js"></script>
+  <script src="./js/av-init.js"></script>
+  <script>
+    $('.signIn').on('submit',(e)=>{
+      e.preventDefault()
+      let hash = []
+      let need = ["email","password"]
+      need.forEach((key)=>{
+        value = $('.signIn').find(`[name=${key}]`).val()
+        hash[key] = value
+      })
+      AV.User.logIn(hash["email"], hash["password"])
+      .then(
+        ()=>{window.location.href = "./index";},
+        (error)=>{alert(JSON.stringify(error))}
+      )
+    })
+  </script>
+</html>

@@ -32,9 +32,15 @@ var server = http.createServer(function(request, response){
     // response.setHeader('Content-Type', 'application/javascript;charset=utf-8')
     // response.write(string)
     response.end()
-  }else if(path === '/index' && method === 'POST'){
+  }else if(path === '/index'){
     response.statusCode = 200
     var string = fs.readFileSync('./src/index.html','utf8')
+    response.setHeader('Content-Type', 'text/html;charset=utf-8')
+    response.write(string)
+    response.end()
+  }else if(path === '/sign_in'){
+    response.statusCode = 200
+    var string = fs.readFileSync('./src/sign_in.html','utf8')
     response.setHeader('Content-Type', 'text/html;charset=utf-8')
     response.write(string)
     response.end()
@@ -48,8 +54,8 @@ var server = http.createServer(function(request, response){
     response.setHeader('Content-Type', 'application/javascript;charset=utf-8')
     response.write(string)
     response.end()
-  }else if(path === '/main.js'){
-    var string = fs.readFileSync('./main.js','utf8')
+  }else if(path === '/js/av-init.js'){
+    var string = fs.readFileSync('./src/js/av-init.js','utf8')
     response.setHeader('Content-Type', 'application/javascript')
     response.write(string)
     response.end()

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="cmn-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>登录/注册</title>
+  </head>
+  <body>
+    <form class="signUp">
+      <h2>注册新用户</h2>
+      <label>用户名<input type="text" name="username"/></label>
+      <label>用户邮箱<input type="text" name="email"/></label>
+      <label>密码<input type="password" name="password"/></label>
+      <label>确认密码<input type="password" name="password_confirmation"
+      /></label>
+      <input type="submit" value="提交" />
+    </form>
+  </body>
+  <script src="../vendor/jquery.min.js"></script>
+  <script src="../vendor/av-min.js"></script>
+  <script>
+    let hash = {};
+    $(".signUp").on("submit", e => {
+      e.preventDefault();
+      //阻止form自己的请求，接下来使用AJAX
+      let need = ["username","email", "password", "password_confirmation"];
+      need.forEach(key => {
+        let value = $(".signUp")
+          .find(`[name=${key}]`)
+          .val();
+        hash[key] = value;
+      });
+      if(hash["email"].indexOf('@') === -1){
+        alert('邮箱格式错误')
+      }else if(hash["password"] !== hash["password_confirmation"]){
+        alert('两次密码不一致')
+      }else{
+        var user = new AV.User()
+        user.setUsername(hash["username"]);
+        user.setPassword(hash["password"]);
+        user.setEmail(hash["email"]);
+        user.signUp().then(
+          ()=>{$.post("index").then(Response=>{$('html').html(Response)});},
+          (error)=>{
+            alert(JSON.stringify(error["rawMessage"]))
+          })
+      }
+      
+      // $.post("sign_up", hash).then(
+      //   () => {
+      //     console.log("success");
+      //   },
+      //   () => {
+      //     console.log("error");
+      //   }
+      // );
+    });
+
+    //////
+    var APP_ID = "JL9sJAyVgDNcqNQDX64nlc8w-gzGzoHsz";
+    var APP_KEY = "HoYerwTeo2l8m92p7ehBb4Bz";
+
+    AV.init({
+      appId: APP_ID,
+      appKey: APP_KEY
+    });
+
+    var TestObject = AV.Object.extend("TestObject");
+    var testObject = new TestObject();
+    testObject
+      .save({
+        words: "Hello World!"
+      })
+      .then(function(object) {
+        alert("LeanCloud Rocks!");
+      });
+  </script>
+</html>

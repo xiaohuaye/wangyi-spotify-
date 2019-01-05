@@ -1,0 +1,64 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*::after {
+  padding: 0;
+  margin: 0;
+}
+
+*::after {
+  box-sizing: border-box;
+}
+
+*::before {
+  box-sizing: border-box;
+}
+
+*::before {
+  padding: 0;
+  margin: 0;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+body {
+  font-size: 0.0555555556rem;
+  color: white;
+  background: url("../../pic/sign_in.jpg") black 0 0 no-repeat;
+  background-size: cover;
+}
+
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.2222222222rem;
+}
+.logo-wrapper span {
+  font-size: 0.0972222222rem;
+  padding-left: 0.0277777778rem;
+}
+.logo-wrapper .logo {
+  height: 0.1111111111rem;
+  width: 0.1111111111rem;
+}
+
+.dign-type {
+  padding-top: 0.0555555556rem;
+  padding-bottom: 0.4166666667rem;
+  text-align: center;
+}
+
+/*# sourceMappingURL=sign_in.css.map */

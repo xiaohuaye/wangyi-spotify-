@@ -1,0 +1,48 @@
+*{padding: 0;margin: 0;}
+*{box-sizing: border-box;}
+*::after{padding: 0;margin: 0;}
+*::after{box-sizing: border-box;}
+*::before{box-sizing: border-box;}
+*::before{padding: 0;margin: 0;}
+
+
+$rem: 360px;
+@function px2rem($px) {
+  @return $px / $rem * 1rem;
+}
+
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+body{
+  font-size: px2rem(20px);
+  color: white;
+  background: url("../../pic/sign_in.jpg") black 0 0  no-repeat;
+  background-size: cover;
+}
+.logo-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: px2rem(80px);
+  span{
+    font-size: px2rem(35px);
+    padding-left: px2rem(10px);
+  }
+  .logo{
+    height: px2rem(40px);
+    width: px2rem(40px);
+  }
+}
+.dign-type{
+  padding-top: px2rem(20px);
+  padding-bottom: px2rem(150px);
+  text-align: center;
+}
+.signIn{
+  
+}
+

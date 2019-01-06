@@ -1,0 +1,128 @@
+*{padding: 0;margin: 0;}
+*{box-sizing: border-box;}
+*::after{padding: 0;margin: 0;}
+*::after{box-sizing: border-box;}
+*::before{box-sizing: border-box;}
+*::before{padding: 0;margin: 0;}
+a{text-decoration: none;}
+
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+$rem: 360px;
+@function px2rem($px) {
+  @return $px / $rem * 1rem;
+}
+body{
+  font-size: px2rem(20px);
+  color: white;
+  background: black;
+}
+footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  .player{
+    background-color: #202427;
+    display: flex;
+    justify-content: space-between;
+    span{
+      padding: px2rem(10px) px2rem(20px);
+    }
+  }
+  .menu{
+    background: #202427;
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid black;
+    box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.75);
+    div{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: px2rem(10px);
+      color:#ADADAD;
+      span{
+        font-size: px2rem(10px);
+      }
+    }
+    div.active{
+      color: white;
+    }
+  }
+}
+section{
+  background: black;
+  font-size: px2rem(20px);
+  width: 100vw;
+}
+.home{
+  display: none;
+}
+.search{
+  display: none;
+  h1{
+    font-size: px2rem(40px);
+    text-align: center;
+    padding-top: px2rem(50px);
+  }
+  form{
+    background-color: white;
+    margin: px2rem(20px);
+    border-radius: 5px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input{
+      background: inherit;
+      margin: px2rem(10px);
+      line-height: px2rem(25px);
+      font-size: px2rem(16px);
+      width: px2rem(200px);
+      border: none;
+      outline: none;
+    }
+  }
+}
+.songList{
+  display: none;
+  .topNarBar{
+    display: flex;
+    justify-content: space-around;
+    padding-top: px2rem(20px);
+    align-items: flex-end;
+    
+    span{
+      border-bottom: 3px solid transparent;
+      letter-spacing: px2rem(2px);
+      color: #ADADAD;
+    }
+    span.active{
+      border-bottom: 3px solid green;
+      color: white;
+      transition: border-bottom 1s;
+    }
+    @keyframes hidden {
+      
+    }
+  }
+}
+.home.active{
+  display: block;
+  background: -webkit-linear-gradient(-70deg, rgba(53,54,36,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%);
+}
+.search.active{
+  display: block;
+  background: -webkit-linear-gradient(-45deg, rgba(53,54,36,1) 0%, rgba(0,0,0,1) 64%, rgba(0,0,0,1) 100%);
+}
+.songList.active{
+  display: block;
+  background: -webkit-linear-gradient(45deg, rgba(53,54,36,1) 0%, rgba(0,0,0,1) 64%, rgba(0,0,0,1) 100%);
+}

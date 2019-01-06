@@ -1,0 +1,155 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*::after {
+  padding: 0;
+  margin: 0;
+}
+
+*::after {
+  box-sizing: border-box;
+}
+
+*::before {
+  box-sizing: border-box;
+}
+
+*::before {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+body {
+  font-size: 0.0555555556rem;
+  color: white;
+  background: black;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+}
+footer .player {
+  background-color: #202427;
+  display: flex;
+  justify-content: space-between;
+}
+footer .player span {
+  padding: 0.0277777778rem 0.0555555556rem;
+}
+footer .menu {
+  background: #202427;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid black;
+  box-shadow: 0px -1px 1px 0px rgba(0, 0, 0, 0.75);
+}
+footer .menu div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.0277777778rem;
+  color: #ADADAD;
+}
+footer .menu div span {
+  font-size: 0.0277777778rem;
+}
+footer .menu div.active {
+  color: white;
+}
+
+section {
+  background: black;
+  font-size: 0.0555555556rem;
+  width: 100vw;
+}
+
+.home {
+  display: none;
+}
+
+.search {
+  display: none;
+}
+.search h1 {
+  font-size: 0.1111111111rem;
+  text-align: center;
+  padding-top: 0.1388888889rem;
+}
+.search form {
+  background-color: white;
+  margin: 0.0555555556rem;
+  border-radius: 5px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search form input {
+  background: inherit;
+  margin: 0.0277777778rem;
+  line-height: 0.0694444444rem;
+  font-size: 0.0444444444rem;
+  width: 0.5555555556rem;
+  border: none;
+  outline: none;
+}
+
+.songList {
+  display: none;
+}
+.songList .topNarBar {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 0.0555555556rem;
+  align-items: flex-end;
+}
+.songList .topNarBar span {
+  border-bottom: 3px solid transparent;
+  letter-spacing: 0.0055555556rem;
+  color: #ADADAD;
+}
+.songList .topNarBar span.active {
+  border-bottom: 3px solid green;
+  color: white;
+  transition: border-bottom 1s;
+}
+@keyframes hidden {}
+
+.home.active {
+  display: block;
+  background: -webkit-linear-gradient(-70deg, #353624 0%, black 50%, black 100%);
+}
+
+.search.active {
+  display: block;
+  background: -webkit-linear-gradient(-45deg, #353624 0%, black 64%, black 100%);
+}
+
+.songList.active {
+  display: block;
+  background: -webkit-linear-gradient(45deg, #353624 0%, black 64%, black 100%);
+}
+
+/*# sourceMappingURL=index.css.map */

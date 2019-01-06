@@ -5,9 +5,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>网易云音乐手机端（spotify风格）</title>
+  <link rel="stylesheet" href="./css/index.css">
+  <script src="//at.alicdn.com/t/font_997722_pf18f3utoa.js"></script>
+  <script>
+      var pageWidth = window.innerWidth;
+      document.write('<style>html{font-size:'+pageWidth+'px;}</style>')
+  </script>
 </head>
 <body>
-  <div>1111</div>
+  <section class="home">
+    <div>最近播放</div>
+    <div>特别推荐</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+  </section>
+  <section class="search">
+    <h1>Search</h1>
+    <form>
+      <span></span><svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-search"></use>
+      </svg></span>
+      <input type="text" value="请输入艺术家，歌名">
+    </form>
+  </section>
+  <section class="songList  active">
+    <div class="topNarBar">
+      <span class="active">歌单</span>
+      <span>艺术家</span>
+      <span>专辑</span>
+    </div>
+  </section>
+  <footer>
+    <div class="player">
+      <span><svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-xihuan"></use>
+      </svg></span>
+      <span>--.--</span>
+      <span><svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-bofang2"></use>
+      </svg></span>
+    </div>
+    <div class="menu">
+      <div class="site-home active">
+          <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-home"></use>
+          </svg>
+        <span>主页</span>
+      </div>
+      <div class="site-search">
+          <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-search"></use>
+          </svg>
+          <span>搜索</span>
+      </div>
+      <div class="site-library">
+          <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-baseline-library_mus"></use>
+          </svg>
+          <span>音乐库</span>
+      </div>
+    </div>
+  </footer>
 </body>
 <script src="../vendor/jquery.min.js"></script>
+<script>
+  $('.menu>div').on('click',(e)=>{
+    $(e.currentTarget).addClass('active').siblings().removeClass('active')
+    let index = $('.menu>div').index(e.currentTarget)
+    let page = $('section')
+    $(page[index]).addClass('active').siblings().removeClass('active')
+  })
+
+  $('.songList>.topNarBar>span').on('click',e=>{
+    $(e.currentTarget).addClass('active').siblings().removeClass('active')
+  })
+</script>
 </html>

@@ -1,0 +1,72 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*::after {
+  padding: 0;
+  margin: 0;
+}
+
+*::after {
+  box-sizing: border-box;
+}
+
+*::before {
+  box-sizing: border-box;
+}
+
+*::before {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-size: 0.0555555556rem;
+  color: white;
+  background: url("../../pic/sign_in.jpg") black 0 0 no-repeat;
+  background-size: cover;
+}
+
+.signUp {
+  display: flex;
+  flex-direction: column;
+  padding: 0.0833333333rem;
+  justify-content: center;
+}
+.signUp label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.0555555556rem;
+}
+.signUp input {
+  outline: none;
+  border: 1px solid white;
+  border-radius: 50px;
+  margin-left: 0.0277777778rem;
+  margin-right: 0.0277777778rem;
+  padding: 0.0138888889rem 0.0416666667rem;
+}
+.signUp input[type=submit] {
+  border: 1px solid white;
+  margin-bottom: 0.0833333333rem;
+  background: white;
+  color: black;
+  text-align: center;
+}
+.signUp input[type=submit].active {
+  color: white;
+  background: black;
+  border: 1px solid black;
+}
+
+/*# sourceMappingURL=sign_up.css.map */

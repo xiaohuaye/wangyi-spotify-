@@ -57,6 +57,10 @@ footer .player {
 footer .player span {
   padding: 0.0277777778rem 0.0555555556rem;
 }
+footer .player .player-index {
+  flex: 1;
+  text-align: center;
+}
 footer .menu {
   background: #202427;
   display: flex;
@@ -135,7 +139,6 @@ section {
   color: white;
   transition: border-bottom 1s;
 }
-@keyframes hidden {}
 
 .home.active {
   display: block;

@@ -38,6 +38,12 @@ var server = http.createServer(function(request, response){
     response.setHeader('Content-Type', 'text/html;charset=utf-8')
     response.write(string)
     response.end()
+  }else if(path === '/player'){
+    response.statusCode = 200
+    var string = fs.readFileSync('./src/player.html','utf8')
+    response.setHeader('Content-Type', 'text/html;charset=utf-8')
+    response.write(string)
+    response.end()
   }else if(path === '/sign_in'){
     response.statusCode = 200
     var string = fs.readFileSync('./src/sign_in.html','utf8')

@@ -34,6 +34,10 @@ footer{
     span{
       padding: px2rem(10px) px2rem(20px);
     }
+    .player-index{
+      flex: 1;
+      text-align: center;
+    }
   }
   .menu{
     background: #202427;
@@ -108,9 +112,6 @@ section{
       border-bottom: 3px solid green;
       color: white;
       transition: border-bottom 1s;
-    }
-    @keyframes hidden {
-      
     }
   }
 }

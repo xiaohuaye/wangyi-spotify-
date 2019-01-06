@@ -1,0 +1,74 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*::after {
+  padding: 0;
+  margin: 0;
+}
+
+*::after {
+  box-sizing: border-box;
+}
+
+*::before {
+  box-sizing: border-box;
+}
+
+*::before {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: url(../../pic/1.jpg) center center no-repeat;
+  background-size: cover;
+  font-size: 0.0444444444rem;
+  z-index: -2;
+  color: white;
+}
+body .mask {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: -1;
+}
+body .top {
+  text-align: center;
+  padding-top: 0.0277777778rem;
+}
+body .lry {
+  width: 0.8333333333rem;
+  border: 1px solid red;
+  height: 0.8333333333rem;
+  margin: 0.0277777778rem auto;
+}
+body .song {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/*# sourceMappingURL=player.css.map */

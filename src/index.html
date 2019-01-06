@@ -44,7 +44,7 @@
       <span><svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-xihuan"></use>
       </svg></span>
-      <span>--.--</span>
+      <span class="player-index">--.--</span>
       <span><svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-bofang2"></use>
       </svg></span>
@@ -80,8 +80,17 @@
     $(page[index]).addClass('active').siblings().removeClass('active')
   })
 
+
   $('.songList>.topNarBar>span').on('click',e=>{
     $(e.currentTarget).addClass('active').siblings().removeClass('active')
+  })
+
+  $('.player-index').on('click',e=>{
+    $.get('player').then(()=>{
+      console.log('请求成功')  
+    },
+    (error)=>{JSON.stringify(error)}
+    )
   })
 </script>
 </html>

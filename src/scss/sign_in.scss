@@ -4,45 +4,51 @@
 *::after{box-sizing: border-box;}
 *::before{box-sizing: border-box;}
 *::before{padding: 0;margin: 0;}
-
+a{text-decoration: none;}
 
 $rem: 360px;
 @function px2rem($px) {
   @return $px / $rem * 1rem;
 }
 
-.icon {
-  width: 1em; height: 1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
-}
 body{
   font-size: px2rem(20px);
   color: white;
   background: url("../../pic/sign_in.jpg") black 0 0  no-repeat;
   background-size: cover;
 }
-.logo-wrapper{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: px2rem(80px);
-  span{
-    font-size: px2rem(35px);
-    padding-left: px2rem(10px);
-  }
-  .logo{
-    height: px2rem(40px);
-    width: px2rem(40px);
-  }
-}
-.dign-type{
-  padding-top: px2rem(20px);
-  padding-bottom: px2rem(150px);
-  text-align: center;
-}
 .signIn{
-  
+  display: flex;
+  flex-direction: column;
+  padding: px2rem(30px);
+  justify-content: center;
+  label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: px2rem(20px);
+  }
+  input{
+    outline: none;
+    border: 1px solid white;
+    border-radius: 50px;
+    margin-left: px2rem(10px);
+    margin-right: px2rem(10px);
+    padding: px2rem(5px) px2rem(15px);
+  }
+  input[type=submit]{
+    border: 1px solid white;
+    margin-bottom: px2rem(30px);
+    background: white;
+    color: black;
+    text-align: center;
+  }
+  input[type=submit].active{
+      color: white;
+      background: black;
+      border: 1px solid black;
+    
+  }
 }
+
 

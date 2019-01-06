@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="cmn-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>登录</title>
+    <link rel="stylesheet" href="./css/sign.css">
+    <script src="//at.alicdn.com/t/font_997722_6yitf6ari65.js"></script>
+    <script>
+        var pageWidth = window.innerWidth;
+        document.write('<style>html{font-size:'+pageWidth+'px;}</style>')
+    </script>
+  </head>
+  <body>
+    <div class="logo-wrapper">
+        <svg class="icon logo" aria-hidden="true">
+            <use xlink:href="#icon-wangyiyunyinle"></use>
+        </svg>
+        <span>网易云音乐</span>
+        
+    </div>
+    <div class="dign-type">(Spotify风格)</div>
+    <div class="sign">
+        <a href="./sign_in.html">登录</a>
+        <a href="./sign_up.html">注册</a>
+        <a href="./index.html">游客试用</a>
+    </div>
+  </body>
+  <script src="../vendor/jquery.min.js"></script>
+  <script>
+    $('.sign>a').on('touchstart',handleStart)
+    $('.sign>a').on('touchend',handleEnd)
+    function handleStart(e){
+      $(e.currentTarget).addClass('active').siblings().removeClass('active')
+    }
+    function handleEnd(e){
+      $('.sign>a').removeClass('active')      
+    }
+  </script>
+</html>

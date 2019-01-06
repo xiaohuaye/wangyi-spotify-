@@ -29,6 +29,14 @@ a {
   text-decoration: none;
 }
 
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
 body {
   font-size: 0.0555555556rem;
   color: white;
@@ -36,36 +44,42 @@ body {
   background-size: cover;
 }
 
-.signIn {
-  display: flex;
-  flex-direction: column;
-  padding: 0.0833333333rem;
-  justify-content: center;
-}
-.signIn label {
+.logo-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 0.0555555556rem;
+  padding-top: 0.2222222222rem;
 }
-.signIn input {
-  outline: none;
-  border: 1px solid white;
-  border-radius: 50px;
-  margin-left: 0.0277777778rem;
-  margin-right: 0.0277777778rem;
-  padding: 0.0138888889rem 0.0416666667rem;
+.logo-wrapper span {
+  font-size: 0.0972222222rem;
+  padding-left: 0.0277777778rem;
 }
-.signIn input[type=submit] {
-  border: 1px solid white;
-  margin-bottom: 0.0833333333rem;
-  background: white;
-  color: black;
+.logo-wrapper .logo {
+  height: 0.1111111111rem;
+  width: 0.1111111111rem;
+}
+
+.dign-type {
+  padding-top: 0.0555555556rem;
+  padding-bottom: 0.4166666667rem;
   text-align: center;
 }
-.signIn input[type=submit].active {
+
+.sign {
+  display: flex;
+  flex-direction: column;
+  padding: 0.0833333333rem;
+}
+.sign a {
+  border: 1px solid white;
+  margin-bottom: 0.0833333333rem;
   color: white;
-  background: black;
+  text-align: center;
+  border-radius: 50px;
+}
+.sign a.active {
+  color: black;
+  background: white;
   border: 1px solid black;
 }
 

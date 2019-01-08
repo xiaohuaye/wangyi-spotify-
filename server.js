@@ -2,6 +2,7 @@ var http = require('http')
 var fs = require('fs')
 var url = require('url')
 var port = process.argv[2]
+var qiniu = require('qiniu')
 
 if(!port){
   console.log('请指定端口号好不啦？\nnode server.js 8888 这样不会吗？')

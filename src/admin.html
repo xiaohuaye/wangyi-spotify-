@@ -1,12 +1,68 @@
 <!DOCTYPE html>
 <html lang="cmn-Hans">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>网易云音乐</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/loading.css">
+  </head>
+  <body>
+    <div class="page">
+      <aside>
+        <div class="newSong"></div>
+        <div class="songList-wrapper"></div>
+        <div id="uploadArea">
+          <div class="uploadArea">
+            <div id="btnUpload" class="btnUpload">
+              点击或拖曳文件
+              <p>文件大小不能超过20MB</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <main>
+        <!-- <audio
+          controls
+          src="http://pjxo7l586.bkt.clouddn.com/bensound-sunny.mp3"
+        ></audio>
+        <div id="uploadStatus"></div> -->
+      </main>
+    </div>
+    <div id="siteLoading"   class="site-loading">
+    </div>
+  </body>
+  <script src="../vendor/jquery.min.js"></script>
+  <script src="./js/eventhub.js"></script>
+  <script src="../vendor/av-min.js"></script>
+  <script src="./js/av-init.js"></script>
+  <script src="../vendor/moxie.min.js"></script>
+  <script src="../vendor/plupload.min.js"></script>
+  <script src="../vendor/qiniu.min.js"></script>
+  <script src="./js/song-list.js"></script>
+  <script src="./js/newSong.js"></script>
+  <script src="./js/upload-song.js"></script>
+  <script src="./js/loading.js"></script>
+  <!-- <script>
+      var TestObject = AV.Object.extend("playlist");
+      var testObject = new TestObject();
+      testObject
+        .save({
+          name: "test",
+          cover: "test",
+          creatorID: "test",
+          discription: "test",
+          songs: []
+        })
+        .then(
+          function(object) {
+            alert("LeanCloud Rocks!");
+          },
+          () => {
+            alert("error");
+          }
+        );
+  </script> -->
+  <script src="./js/song-form.js"></script>
 </html>

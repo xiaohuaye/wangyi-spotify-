@@ -2,11 +2,15 @@
   "dependencies": {
     "jquery": "^3.3.1",
     "leancloud-storage": "^3.11.1",
-    "node-sass": "^4.11.0"
+    "node-sass": "^4.11.0",
+    "plupload": "^2.3.6",
+    "qiniu": "^7.2.1",
+    "qiniu-js": "^1.0.24"
   },
   "name": "wangyi-phone",
   "version": "1.0.0",
   "main": "index.js",
   "author": "xiaohuaye <908347816@qq.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": "git@github.com:xiaohuaye/wangyi-spotify-.git"
 }

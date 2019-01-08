@@ -37,6 +37,8 @@ footer{
     .player-index{
       flex: 1;
       text-align: center;
+      padding: px2rem(10px) px2rem(20px);
+      color: white;
     }
   }
   .menu{
@@ -68,6 +70,9 @@ section{
 }
 .home{
   display: none;
+  .recommend{
+    font-size: px2rem(14px);
+  }
 }
 .search{
   display: none;

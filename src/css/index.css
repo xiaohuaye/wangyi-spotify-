@@ -60,6 +60,8 @@ footer .player span {
 footer .player .player-index {
   flex: 1;
   text-align: center;
+  padding: 0.0277777778rem 0.0555555556rem;
+  color: white;
 }
 footer .menu {
   background: #202427;
@@ -91,6 +93,9 @@ section {
 
 .home {
   display: none;
+}
+.home .recommend {
+  font-size: 0.0388888889rem;
 }
 
 .search {

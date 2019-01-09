@@ -22,7 +22,7 @@
         uptoken_url: jQuery.parseJSON(JSON.stringify("http://localhost:8888/uptoken")),
         domain: "http://pjxo7l586.bkt.clouddn.com", //bucket 域名，下载资源时用到，**必需**
         get_new_uptoken: false, //设置上传文件的时候是否每次都重新获取新的token
-        max_file_size: "10mb", //最大文件体积限制
+        max_file_size: "20mb", //最大文件体积限制
         dragdrop: true, //开启可拖曳上传
         drop_element: this.view.find("#uploadArea"), //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
         auto_start: true, //选择文件后自动上传，若关闭需要自己绑定事件触发上传

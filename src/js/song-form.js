@@ -39,9 +39,9 @@
   };
   let model = {
     data: { name: "", singer: "", url: "", id: "" },
-    updata(data){
+    updata(listName,data){
       var song = AV.Object.createWithoutData(
-        "song",
+        listName,
         this.data.id
       );
       song.set("name", data.name);
@@ -54,10 +54,8 @@
         }
       )
     },
-    create(data) {
-      // 声明一个 Todo 类型
-      var Song = AV.Object.extend("song");
-      // 新建一个 Todo 对象
+    create(listName,data) {
+      var Song = AV.Object.extend(listName);
       var song = new Song();
       song.set("name", data.name);
       song.set("singer", data.singer);
@@ -103,10 +101,11 @@
     create() {
       let need = "name singer url".split(" ");
       let data = {};
+      let listName = ''
       need.map(string => {
         data[string] = this.view.$el.find(`input[name = "${string}"]`).val();
       });
-      this.model.create(data).then(
+      this.model.create(listName,data).then(
         () => {
           // this.view.render(this.model.data)
           this.view.reset();
@@ -122,10 +121,11 @@
     updata() {
       let need = "name singer url".split(" ");
       let data = {};
+      let listName = "song"
       need.map(string => {
         data[string] = this.view.$el.find(`input[name = "${string}"]`).val();
       });
-      this.model.updata(data).then(()=>{
+      this.model.updata(listName,data).then(()=>{
         window.eventhub.emit('updata',JSON.parse(JSON.stringify(this.model.data)) )
       })
     },

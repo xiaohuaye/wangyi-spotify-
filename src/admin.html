@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>网易云音乐</title>
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/loading.css">
+    <link rel="stylesheet" href="./css/loading.css" />
   </head>
   <body>
     <div class="page">
@@ -22,17 +22,27 @@
           </div>
         </div>
       </aside>
-      <main>
-        <!-- <audio
-          controls
-          src="http://pjxo7l586.bkt.clouddn.com/bensound-sunny.mp3"
-        ></audio>
-        <div id="uploadStatus"></div> -->
-      </main>
+      <main></main>
+      <section id="model-songLists">
+      </section>
+      
     </div>
-    <div id="siteLoading"   class="site-loading">
-    </div>
+    <div id="siteLoading" class="site-loading"></div>
   </body>
+  <style>
+    .flexwindow {
+      display: none;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      border: 1px solid black;
+    }
+    .flexwindow.show {
+      display: block;
+      height: 30vw;
+      width: 30vw;
+    }
+  </style>
   <script src="../vendor/jquery.min.js"></script>
   <script src="./js/eventhub.js"></script>
   <script src="../vendor/av-min.js"></script>
@@ -44,25 +54,6 @@
   <script src="./js/newSong.js"></script>
   <script src="./js/upload-song.js"></script>
   <script src="./js/loading.js"></script>
-  <!-- <script>
-      var TestObject = AV.Object.extend("playlist");
-      var testObject = new TestObject();
-      testObject
-        .save({
-          name: "test",
-          cover: "test",
-          creatorID: "test",
-          discription: "test",
-          songs: []
-        })
-        .then(
-          function(object) {
-            alert("LeanCloud Rocks!");
-          },
-          () => {
-            alert("error");
-          }
-        );
-  </script> -->
   <script src="./js/song-form.js"></script>
+  <script src="./js/creatSonglist.js"></script>
 </html>

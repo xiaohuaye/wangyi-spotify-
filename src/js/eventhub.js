@@ -2,8 +2,8 @@ window.eventhub = {
   events: {},
   //发布
   emit(eventName, data) {
-    for (let key in this.events) {
-      if (key === eventName) {
+    for (let key in this.events){
+      if (key === eventName){
         let fnlist = this.events[key];
         fnlist.map(fn => {
           return fn(data);

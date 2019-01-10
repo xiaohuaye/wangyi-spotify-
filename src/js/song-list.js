@@ -19,7 +19,9 @@
         
       $el.find('ul').empty()
       liList.map((domLi)=>{
-        $el.find('ul').append(domLi)
+        if(domLi[0].innerText){
+          $el.find('ul').append(domLi)
+        }
       })
     },
     clearActive(){
@@ -35,8 +37,8 @@
       songs:[],
       selectedSongId: null,
     },
-    find(){
-      var query = new AV.Query('song')
+    find(ListName){
+      var query = new AV.Query(ListName)
       return query.find().then((songs)=>{
         this.data.songs = songs.map((song)=>{
           return{id:song.id, ...song.attributes}
@@ -89,8 +91,12 @@
       })
     },
     getAllSongs(){
-      return this.model.find().then(()=>{
-        this.view.render(this.model.data)
+      window.eventhub.on('selectSongList',(data)=>{
+        return this.model.find(data).then(()=>{
+          this.view.render(this.model.data)
+        },
+        ()=>{this.view.render({})}
+        )
       })
     }
   }

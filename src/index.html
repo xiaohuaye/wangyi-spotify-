@@ -122,7 +122,7 @@
   $('.songList>.topNarBar>span').on('click',e=>{
     $(e.currentTarget).addClass('active').siblings().removeClass('active')
   })
-
+//全局的歌单被点击时，触发
   $('body').on('click','.site-songlist', e=>{
     $('section').removeClass('active')
     let section = $('section')
@@ -134,7 +134,10 @@
         let lidom =  songlists.map(songlist=>{
           if(songlist.attributes.url){
             let name = songlist.attributes.name.split('.mp')
-            let $li = $('<li></li>')
+            let $li = $('<li class="site-song"></li>').attr(
+              {'data-song-id': songlist.id,
+              'data-songlistName': listId
+          })
             let $span1 = $('<span></span>').text(name[0])
             let $span2 = $('<span></span>').text(songlist.attributes.singer)
             $($li).append($span1).append($span2)
@@ -156,7 +159,15 @@
     // console.log(offset)
   // })
   })
-  
+  //全局的歌被点击时触发
+  $('body').on('click','.site-song', e=>{
+    let hash = {
+      'songId' : e.currentTarget.attributes[1].value,
+      'className' : e.currentTarget.attributes[2].value
+    }
+    let url = `./player.html?className=${hash['className']}&&songId=${hash['songId']}`
+    window.location.href = url
+  })
   
 </script>
 </html>

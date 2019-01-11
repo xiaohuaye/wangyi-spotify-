@@ -66,15 +66,11 @@ var server = http.createServer(function(request, response){
     response.setHeader('Content-Type', 'application/javascript')
     response.write(string)
     response.end()
-  }else if(path === '/pay'){
-    var amount = fs.readFileSync('./db','utf8')
-    var newAmount = amount - 1 
-    fs.writeFileSync('./db',newAmount)
-    response.setHeader('Content-Type', 'application/javascript')
+  }else if(path === '/player' && method === 'POST'){
     response.statusCode = 200
-    response.write(`
-      ${query.callback}.call(undefined,'success')
-    `)
+    string = fs.readFileSync('./src/player.html','utf8')
+    response.setHeader('Content-Type', 'text/html;charset=utf-8')
+    response.write(string)
     response.end()
   }else{
     response.statusCode = 404

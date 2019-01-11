@@ -14,17 +14,41 @@
 </head>
 <body>
   <section class="home active">
-    <div>最近播放</div>
     <div class="recommend">
       <h1>特别推荐</h1>
-      <a href=""></a>
+      <ul class="recommend-wrapper">
+        <li class="site-songlist" data-songListId="zl7b2c36315c4a683c83b17f8e595663d0540d540d5355">
+          <img src="http://pjxo7l586.bkt.clouddn.com/109951163575057615.webp" alt="">
+          <span>第61届格莱美奖提名名单</span>
+        </li>
+        <li class="site-songlist" data-songListId="zl9cb84e9197f365484e0e753597f3">
+          <img src="http://pjxo7l586.bkt.clouddn.com/109951163662814383.webp" alt="">
+          <span>鲸云音效与电音</span>
+        </li>
+        <li class="site-songlist" data-songListId="zl90a34e9b8d855e26611f768482f165876b4c66f2">
+          <img src="http://pjxo7l586.bkt.clouddn.com/109951163731947006.webp" alt="">
+          <span>那些超带感的英文歌曲</span>
+        </li>
+        <li class="site-songlist" data-songListId="zl5b899759768465e58bed6b4c">
+          <img src="http://pjxo7l586.bkt.clouddn.com/109951163756018423.webp" alt="">
+          <span>安静的日语歌</span>
+        </li>
+        <li class="site-songlist" data-songListId="zl57307403774096468ba15212">
+          <img src="http://pjxo7l586.bkt.clouddn.com/109951163763955468.webp" alt="">
+          <span>地球着陆计划</span>
+        </li>
+        <li class="site-songlist" data-songListId="zl572859166f026cca">
+          <img src="http://pjxo7l586.bkt.clouddn.com/109951163769386329.jpg" alt="">
+          <span>在外漂泊</span>
+        </li>
+      </ul>
     </div>
-    <div>3</div>
-    <div>4</div>
-    <div>5</div>
-    <div>6</div>
-    <div>7</div>
-    <div>8</div>
+    <div class="lastestSong">
+      <h1>最新歌曲</h1>
+      <div class="lastestSong-wrapper">
+
+      </div>
+    </div>
   </section>
   <section class="search">
     <h1>Search</h1>
@@ -41,6 +65,15 @@
       <span>艺术家</span>
       <span>专辑</span>
     </div>
+  </section>
+  <section class="songlist-detail">
+    <nav>
+      <span>返回</span>
+      <span>喜欢</span>
+    </nav>
+    <img src="http://pjxo7l586.bkt.clouddn.com/109951163756018423.webp" alt="">
+    <div class="title"></div>
+    <ul></ul>
   </section>
   <footer>
     <div class="player">
@@ -75,6 +108,8 @@
   </footer>
 </body>
 <script src="../vendor/jquery.min.js"></script>
+<script src="../vendor/av-min.js"></script>
+<script src="./js/av-init.js"></script>
 
 <script>
   $('.menu>div').on('click',(e)=>{
@@ -84,18 +119,44 @@
     $(page[index]).addClass('active').siblings().removeClass('active')
   })
 
-
   $('.songList>.topNarBar>span').on('click',e=>{
     $(e.currentTarget).addClass('active').siblings().removeClass('active')
   })
 
-  // $('.player-index').on('click',e=>{
-  //   $.get('player').then(()=>{
-  //     console.log('请求成功')  
-  //   },
-  //   (error)=>{JSON.stringify(error)}
-  //   )
+  $('body').on('click','.site-songlist', e=>{
+    $('section').removeClass('active')
+    let section = $('section')
+    $(section[3]).addClass('active')
+    let listId = e.currentTarget.attributes[1].nodeValue
+    if(listId){
+      let query = new AV.Query(listId);
+      query.find().then((songlists)=> {
+        let lidom =  songlists.map(songlist=>{
+          if(songlist.attributes.url){
+            let name = songlist.attributes.name.split('.mp')
+            let $li = $('<li></li>')
+            let $span1 = $('<span></span>').text(name[0])
+            let $span2 = $('<span></span>').text(songlist.attributes.singer)
+            $($li).append($span1).append($span2)
+            return $li
+          }else if(songlist.attributes.listName){
+            let h1 = $('<h1></h1>').text(songlist.attributes.listName)
+            $('.title').empty().append(h1)
+          }
+        })
+        $('.songlist-detail>ul').empty()
+        lidom.map(song=>{
+          $('.songlist-detail>ul').append(song)
+        })
+      },
+      (error)=>{console.log(error)})
+    }
+    // $('.songlist-detail').on('scroll',()=>{
+    // let offset = $('.songlist-detail .title').offset()
+    // console.log(offset)
   // })
+  })
+  
   
 </script>
 </html>

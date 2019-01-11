@@ -29,6 +29,10 @@ a {
   text-decoration: none;
 }
 
+li {
+  list-style: none;
+}
+
 .icon {
   width: 1em;
   height: 1em;
@@ -41,13 +45,15 @@ body {
   font-size: 0.0555555556rem;
   color: white;
   background: black;
+  height: 84vh;
 }
 
 footer {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100vw;
+  width: 1rem;
+  height: 16vh;
 }
 footer .player {
   background-color: #202427;
@@ -88,7 +94,8 @@ footer .menu div.active {
 section {
   background: black;
   font-size: 0.0555555556rem;
-  width: 100vw;
+  height: 84vh;
+  overflow: auto;
 }
 
 .home {
@@ -97,7 +104,39 @@ section {
 .home .recommend {
   font-size: 0.0388888889rem;
 }
-
+.home .recommend h1 {
+  padding: 0.0277777778rem;
+}
+.home .recommend h1::after {
+  display: block;
+  content: "";
+  border: 0.5px solid #ADADAD;
+  width: 100%;
+  margin: 0.0277777778rem auto;
+}
+.home .recommend .recommend-wrapper {
+  width: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.home .recommend .recommend-wrapper li {
+  display: flex;
+  flex-direction: column;
+  width: 0.2777777778rem;
+  padding-bottom: 0.0555555556rem;
+}
+.home .recommend .recommend-wrapper li img {
+  width: 0.2777777778rem;
+  height: 0.2777777778rem;
+  border-radius: 2px;
+}
+.home .lastestSong {
+  font-size: 0.0388888889rem;
+}
+.home .lastestSong h1 {
+  padding: 0.0277777778rem;
+}
 .search {
   display: none;
 }
@@ -145,6 +184,37 @@ section {
   transition: border-bottom 1s;
 }
 
+.songlist-detail {
+  display: none;
+}
+.songlist-detail nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.songlist-detail nav span {
+  padding: 0.0277777778rem;
+}
+.songlist-detail img {
+  width: 0.4444444444rem;
+  height: 0.4444444444rem;
+  display: block;
+  margin: 0.1666666667rem auto 0.0833333333rem;
+}
+.songlist-detail .title h1 {
+  font-size: 0.0694444444rem;
+  text-align: center;
+}
+.songlist-detail ul li {
+  font-size: 0.0444444444rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0.0277777778rem 0.0416666667rem;
+}
+
 .home.active {
   display: block;
   background: -webkit-linear-gradient(-70deg, #353624 0%, black 50%, black 100%);
@@ -158,6 +228,11 @@ section {
 .songList.active {
   display: block;
   background: -webkit-linear-gradient(45deg, #353624 0%, black 64%, black 100%);
+}
+
+.songlist-detail.active {
+  display: block;
+  background: -webkit-linear-gradient(-70deg, #353624 0%, black 64%, black 100%);
 }
 
 /*# sourceMappingURL=index.css.map */

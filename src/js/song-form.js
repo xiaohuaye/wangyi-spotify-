@@ -151,7 +151,11 @@
         this.view.render(this.model.data);
       });
       window.eventhub.on("new", data => {
-        Object.assign(this.model.data, data);
+        let need = {}
+        need.name = data.name.split('-')[1]
+        need.singer = data.name.split('-')[0]
+        need.url = data.url
+        Object.assign(this.model.data, need);
         this.model.data.id = ""
         this.view.render(this.model.data);
       });

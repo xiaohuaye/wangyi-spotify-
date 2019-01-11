@@ -5,6 +5,7 @@
 *::before{box-sizing: border-box;}
 *::before{padding: 0;margin: 0;}
 a{text-decoration: none;}
+li{list-style: none;}
 
 .icon {
   width: 1em; height: 1em;
@@ -21,12 +22,14 @@ body{
   font-size: px2rem(20px);
   color: white;
   background: black;
+  height: 84vh;
 }
 footer{
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100vw;
+  width: px2rem(360px);
+  height: 16vh;
   .player{
     background-color: #202427;
     display: flex;
@@ -66,12 +69,49 @@ footer{
 section{
   background: black;
   font-size: px2rem(20px);
-  width: 100vw;
+  height: 84vh;
+  overflow: auto;
 }
 .home{
   display: none;
   .recommend{
     font-size: px2rem(14px);
+    h1{
+      padding: px2rem(10px);
+    }
+    h1::after{
+      display: block;
+      content: "";
+      border: 0.5px solid #ADADAD;
+      width: 100%;
+      margin: px2rem(10px) auto;
+    }
+    .recommend-wrapper{
+      width: px2rem(360px);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      li{
+        display: flex;
+        flex-direction: column;
+        width: px2rem(100px);
+        padding-bottom: px2rem(20px);
+        img{
+          width: px2rem(100px);
+          height: px2rem(100px);
+          border-radius: 2px;
+        }
+      }
+    }
+  }
+  .lastestSong{
+    font-size: px2rem(14px);
+    h1{
+      padding: px2rem(10px);
+    }
+    .lastestSong-wrapper{
+
+    }
   }
 }
 .search{
@@ -120,6 +160,40 @@ section{
     }
   }
 }
+.songlist-detail{
+  display: none;
+  nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    span{
+      padding: px2rem(10px);
+    }
+  }
+  img{
+    width: px2rem(160px);
+    height: px2rem(160px);
+    display: block;
+    margin: px2rem(60px) auto px2rem(30px);
+  }
+  .title{
+    h1{
+      font-size: px2rem(25px);
+      text-align: center;
+    }
+  }
+  ul{
+    li{
+      font-size: px2rem(16px);
+      display: flex;
+      flex-direction: column;
+      padding: px2rem(10px) px2rem(15px);
+    }
+  }
+}
 .home.active{
   display: block;
   background: -webkit-linear-gradient(-70deg, rgba(53,54,36,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%);
@@ -131,4 +205,8 @@ section{
 .songList.active{
   display: block;
   background: -webkit-linear-gradient(45deg, rgba(53,54,36,1) 0%, rgba(0,0,0,1) 64%, rgba(0,0,0,1) 100%);
+}
+.songlist-detail.active{
+  display: block;
+  background: -webkit-linear-gradient(-70deg, rgba(53,54,36,1) 0%, rgba(0,0,0,1) 64%, rgba(0,0,0,1) 100%);
 }

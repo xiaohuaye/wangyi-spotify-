@@ -70,5 +70,22 @@ body .song {
   align-items: center;
   flex-direction: column;
 }
+body .player .pass-wrapper {
+  width: 0.6666666667rem;
+  height: 0.0083333333rem;
+  background: #ADADAD;
+  margin: 0.0277777778rem;
+  position: relative;
+  border-radius: 3px;
+}
+body .player .pass-wrapper .pass {
+  width: 0%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: black;
+  border-radius: 3px;
+}
 
 /*# sourceMappingURL=player.css.map */

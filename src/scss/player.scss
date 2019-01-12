@@ -50,4 +50,23 @@ body{
    align-items: center;
    flex-direction: column;
   }
+  .player{
+    .pass-wrapper{
+      width: px2rem(240px);
+      height: px2rem(3px);
+      background: #ADADAD;
+      margin: px2rem(10px);
+      position: relative;
+      border-radius: 3px;
+      .pass{
+        width: 0%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: black;
+        border-radius: 3px;
+      }
+    }
+  }
 }

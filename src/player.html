@@ -15,17 +15,23 @@
     <div class="mask"></div>
     <div class="top">
       <div>正在播放歌单</div>
-      <div>{{ anmation }}</div>
+      <h1></h1>
     </div>
     <div class="lry"></div>
     <div class="song">
-      <span>{{ songName }}</span> <span>{{ songer }}</span>
+      <span class="songName"></span>
+      <span class="singer"></span>
     </div>
     <div class="player">
-      <span>收藏</span> <span>前一首</span> <span>播放/暂停</span>
+      <span>收藏</span> <span>前一首</span> <span id="pause">播放/暂停</span>
       <span>下一首</span> <span>单曲循环/随机播放</span>
+      <div class="passBar">
+        <span class="currentTime">00:00</span>
+        <div class="pass-wrapper"><div class="pass"></div></div>
+        <span class="totalTime">00:00</span>
+      </div>
     </div>
-    <audio src="" controls autoplay="true" buffered></audio>
+    <audio src="" controls ></audio>
   </body>
   <script src="../vendor/jquery.min.js"></script>
   <script src="../vendor/av-min.js"></script>
@@ -48,18 +54,59 @@
       (todo)=> {
         console.log(todo.attributes)
         $('audio').attr('src',todo.attributes.url)
+        $('.song .songName').text(todo.attributes.name)
+        $('.song .singer').text(todo.attributes.singer)
       },
-      function(error) {
-        console.log(error);
-      }
-    );
+        function(error) {
+          console.log(error);
+        }
+      );
+      var Query = new AV.Query('AllSongLists')
+      Query.find().then((e)=>{
+        e.map((songlistName)=>{
+          let ObjectName = songlistName.attributes.ObjectName
+          let listName = songlistName.attributes.songListName
+          if( ObjectName === theRequest.className){
+            $('.top h1').text(listName)
+          }
+        })
+      })
       $('audio').on('loadedmetadata',()=>{
         let audio = $('audio')
-        console.log(audio[0].duration)
+        let totalTime = audio[0].duration
+        let currentTime
+        function timeStyle(time){
+          let min = parseInt(time/60,10)
+          let sec = parseInt(time % 60,10)
+          if(time <= 600){
+            min = '0'+min
+          }
+          if(sec<10){sec = '0' + sec}
+          let Time = min +":"+ sec
+          return Time
+        }
+        $('.totalTime').empty().text(timeStyle(totalTime)) 
+         setInterval(()=>{
+          currentTime = audio[0].currentTime
+          pass = currentTime/totalTime
+          $('.player .pass').css('width',`${pass*100}%`)
+          $('.currentTime').empty().text(timeStyle(currentTime))
+        },1000)
+        
       }) 
       return theRequest;
     }
     GetRequest();
-    
+    let taggle = false
+    $('#pause').on('click',()=>{
+      let audio = $('audio')
+      if(!taggle){
+        audio[0].play()
+        taggle = true
+      }else{
+        audio[0].pause()
+        taggle = false
+      }
+    })
   </script>
 </html>

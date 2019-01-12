@@ -50,14 +50,17 @@
       </div>
     </div>
   </section>
+
+
   <section class="search">
     <h1>Search</h1>
     <form>
       <span></span><svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-search"></use>
       </svg></span>
-      <input type="text" value="请输入艺术家，歌名">
+      <input type="text" placeholder="请输入艺术家，歌名">
     </form>
+    <ul id="search-result"></ul>
   </section>
   <section class="songList">
     <div class="topNarBar">
@@ -169,5 +172,47 @@
     window.location.href = url
   })
   
+  //搜索
+  $('.search form').on('submit',(e)=>{
+    e.preventDefault()
+    $('#search-result').empty()
+    let value = $('.search input')[0].value
+    hash = ['name','singer']
+    for(i=0;i<hash.length;i++){
+      search(hash[i],value)
+    }
+  }
+)
+function search(className,value){
+  var query = new AV.Query('AllSongLists');
+  query.find().then(
+      (songlists)=>{  //歌单列表
+        songlists.map((songlist)=>{  //每一个歌单
+          let ObjectName = songlist.attributes.ObjectName
+          let query1 = new AV.Query(ObjectName) //查找每个歌单
+            query1.contains(className,value);
+            return query1.find().then( //在歌单里面查找对应的歌
+            songs=>{
+              if(songs.length !== 0){ //如果找到
+                songs.map(song=>{
+                  console.log(song)
+                  let name = song.attributes.name.split('.mp') //name[0]就是歌名
+                  let $li = $('<li class="site-song"></li>').attr(
+                    {
+                    'data-song-id': song.id,
+                    'data-songlistName': song.attributes.listName
+                    })
+                    let $span1 = $('<span></span>').text(name[0])
+                    let $span2 = $('<span></span>').text(song.attributes.singer)
+                    $($li).append($span1).append($span2)
+                    $('#search-result').append($li)
+                })
+              }
+            }
+          )
+        
+      })
+    })
+}
 </script>
 </html>

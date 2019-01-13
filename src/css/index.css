@@ -66,8 +66,16 @@ footer .player span {
 footer .player .player-index {
   flex: 1;
   text-align: center;
-  padding: 0.0277777778rem 0.0555555556rem;
+  margin: 0.0416666667rem 0.0555555556rem 0.0277777778rem;
   color: white;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0.0444444444rem;
+  text-align: center;
+}
+footer .player .player-index span {
+  padding: 0;
+  transition: all 0.5s;
 }
 footer .menu {
   background: #202427;

@@ -40,8 +40,16 @@ footer{
     .player-index{
       flex: 1;
       text-align: center;
-      padding: px2rem(10px) px2rem(20px);
+      margin: px2rem(15px) px2rem(20px) px2rem(10px);
       color: white;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: px2rem(16px);
+      text-align: center;
+      span{
+        padding: 0;
+        transition: all 0.5s;
+      }
     }
   }
   .menu{

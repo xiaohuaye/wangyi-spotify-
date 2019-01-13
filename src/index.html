@@ -83,8 +83,9 @@
       <span><svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-xihuan"></use>
       </svg></span>
-      <a href="./player.html" class="player-index">--.--</a>
-      <span><svg class="icon" aria-hidden="true">
+      <audio src=""></audio>
+      <a href="./player.html" class="player-index"><span></span></a>
+      <span id="footer-play"><svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-bofang2"></use>
       </svg></span>
     </div>
@@ -124,6 +125,36 @@
 
   $('.songList>.topNarBar>span').on('click',e=>{
     $(e.currentTarget).addClass('active').siblings().removeClass('active')
+  })
+  let taggle = false
+  let time
+  $('#footer-play').on('click',()=>{
+    console.log(time)
+    if(time){clearInterval(time)}
+    let audio = $('audio')
+      if(!taggle){
+        audio[0].play()
+        taggle = true
+        let aWidth = $('.player-index').width()
+        let sWidth = $('.player-index>span').width()
+        if(aWidth<sWidth){
+          let n = 0
+          time = setInterval(() => {
+            $('.player-index>span').css('margin-left',`${n}px`)
+            if((-n/2)>sWidth){
+              $('.player-index>span').css('display','none')
+              n = sWidth
+              setTimeout(()=>{
+                $('.player-index>span').css('display','inline')
+              },100)
+            }else{n = n - 3}
+          },100) 
+        }
+      }else{
+        audio[0].pause()
+        taggle = false
+      }
+    
   })
 //全局的歌单被点击时，触发
   $('body').on('click','.site-songlist', e=>{
@@ -168,8 +199,19 @@
       'songId' : e.currentTarget.attributes[1].value,
       'className' : e.currentTarget.attributes[2].value
     }
+    let query = new AV.Query(hash['className'])
+    query.get(hash['songId']).then(
+      song=>{
+        console.log(song)
+        let name = song.attributes.name.split('.mp')
+        let singer = song.attributes.singer
+        let url = song.attributes.url
+        $('.player-index>span').text(`${name[0]}--${singer}`)
+        $('.player audio').attr('src',url)
+      }
+    )
     let url = `./player.html?className=${hash['className']}&&songId=${hash['songId']}`
-    window.location.href = url
+    // window.location.href = url
   })
   
   //搜索

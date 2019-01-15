@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>网易云音乐手机端（spotify风格）</title>
   <link rel="stylesheet" href="./css/index.css">
-  <script src="//at.alicdn.com/t/font_997722_pf18f3utoa.js"></script>
+  <script src="//at.alicdn.com/t/font_997722_2yqkrb23r22.js"></script>
   <script>
       var pageWidth = window.innerWidth;
       document.write('<style>html{font-size:'+pageWidth+'px;}</style>')
@@ -44,9 +44,9 @@
       </ul>
     </div>
     <div class="lastestSong">
-      <h1>最新歌曲</h1>
+      <h1 class="title-new"></h1>
       <div class="lastestSong-wrapper">
-
+        <ul></ul>
       </div>
     </div>
   </section>
@@ -60,14 +60,36 @@
       </svg></span>
       <input type="text" placeholder="请输入艺术家，歌名">
     </form>
+    <div class="class-recommend">
+      <h2>浏览全部</h2>
+      <ul>
+        <li class="site-songlist" data-songListId="zl53e45178" style="background: linear-gradient(135deg, rgba(14,59,50,1) 0%, rgba(52,153,84,1) 100%);">
+          <span>古典</span>
+        </li>
+        <li class="site-songlist" data-songListId="zl4f24611f" style="background: linear-gradient(135deg, rgba(92,5,51,1) 0%, rgba(184,106,70,1) 100%);">
+          <span>伤感</span>
+        </li>
+        <li class="site-songlist" data-songListId="zl53e45178" style="background: linear-gradient(135deg, rgba(5,20,92,1) 0%, rgba(105,116,219,1) 100%);">
+          <span>流行乐</span>
+        </li>
+        <li class="site-songlist" data-songListId="zl75355b50821e66f2" style="background: linear-gradient(135deg, rgba(128,36,120,1) 0%, rgba(215,104,217,1) 100%);">
+            <span>电子舞曲</span>
+        </li>
+
+
+      </ul>
+    </div>
     <ul id="search-result"></ul>
   </section>
   <section class="songList">
     <div class="topNarBar">
-      <span class="active">歌单</span>
+      <span class="active">喜欢的歌</span>
       <span>艺术家</span>
       <span>专辑</span>
     </div>
+    <div class="likeSong-page active">1</div>
+    <div class="art-page">2</div>
+    <div class="albums-page">3</div>
   </section>
   <section class="songlist-detail">
     <nav>
@@ -80,14 +102,24 @@
   </section>
   <footer>
     <div class="player">
-      <span><svg class="icon" aria-hidden="true">
+      <span id="like" class="like-selec">
+        <svg class="icon dislike active" aria-hidden="true">
           <use xlink:href="#icon-xihuan"></use>
-      </svg></span>
+        </svg>
+        <svg class="icon like" aria-hidden="true">
+            <use xlink:href="#icon-xihuan1"></use>
+        </svg>
+    </span>
       <audio src=""></audio>
       <a href="./player.html" class="player-index"><span></span></a>
-      <span id="footer-play"><svg class="icon" aria-hidden="true">
+      <span id="footer-play" class="footer-play">
+        <svg class="icon start active" aria-hidden="true">
           <use xlink:href="#icon-bofang2"></use>
-      </svg></span>
+        </svg>
+        <svg class="icon pause" aria-hidden="true">
+          <use xlink:href="#icon-zantingtingzhi"></use>
+        </svg>
+    </span>
     </div>
     <div class="menu">
       <div class="site-home active">
@@ -116,11 +148,52 @@
 <script src="./js/av-init.js"></script>
 
 <script>
+  let hashlocalStorage = JSON.parse(localStorage.getItem('wangyimusic') || '')
+  let query = new AV.Query(hashlocalStorage['className'])
+    query.get(hashlocalStorage['songId']).then(
+      song=>{
+        let name = song.attributes.name.split('.mp')
+        let singer = song.attributes.singer
+        let url = song.attributes.url
+        $('.player-index>span').text(`${name[0]}--${singer}`)
+        $('.player audio').attr('src',url)
+      }
+    )
+
+  let query2 = new AV.Query('zl65b06b4c535566f2');
+      query2.find().then((songlists)=> {
+        let lidom = songlists.map(songlist=>{
+          if(songlist.attributes.url){
+            let name = songlist.attributes.name.split('.mp')
+            let $li = $('<li class="site-song"></li>').attr(
+              {'data-song-id': songlist.id,
+              'data-songlistName': 'zl65b06b4c535566f2'
+          })
+            let $img = $(`<img src=${songlist.attributes.imgURL}></img>`)
+            let $span1 = $('<span></span>').text(name[0])
+            let $span2 = $('<span></span>').text(songlist.attributes.singer)
+            $($li).append($img).append($span1).append($span2)
+            return $li
+          }else if(songlist.attributes.listName){
+            let h1 = $('<h1></h1>').text(songlist.attributes.listName)
+            $('.title-new').empty().append(h1)
+          }
+        })
+        $('.lastestSong-wrapper>ul').empty()
+        lidom.map(song=>{
+          $('.lastestSong-wrapper>ul').append(song)
+        })
+      },
+      (error)=>{console.log(error)
+    })
+
   $('.menu>div').on('click',(e)=>{
     $(e.currentTarget).addClass('active').siblings().removeClass('active')
     let index = $('.menu>div').index(e.currentTarget)
     let page = $('section')
     $(page[index]).addClass('active').siblings().removeClass('active')
+    $('.class-recommend').removeClass('hidden')
+    $('#search-result').empty()
   })
 
   $('.songList>.topNarBar>span').on('click',e=>{
@@ -129,14 +202,22 @@
   let taggle = false
   let time
   $('#footer-play').on('click',()=>{
-    console.log(time)
-    if(time){clearInterval(time)}
+    let aWidth = $('.player-index').width()
+    let sWidth = $('.player-index>span').width()
+    if($('.player audio').attr('src')){
+      if(time){
+        clearInterval(time)
+        $('.player-index>span').css('display',`none`)
+        setTimeout(()=>{
+                $('.player-index>span').css('display','inline')
+                $('.player-index>span').css('margin-left',`0px`)
+              },100)
+      }
     let audio = $('audio')
       if(!taggle){
         audio[0].play()
         taggle = true
-        let aWidth = $('.player-index').width()
-        let sWidth = $('.player-index>span').width()
+        $('#footer-play>.pause').addClass('active').siblings().removeClass('active')
         if(aWidth<sWidth){
           let n = 0
           time = setInterval(() => {
@@ -153,8 +234,9 @@
       }else{
         audio[0].pause()
         taggle = false
+        $('#footer-play>.start').addClass('active').siblings().removeClass('active')
       }
-    
+    }
   })
 //全局的歌单被点击时，触发
   $('body').on('click','.site-songlist', e=>{
@@ -188,10 +270,6 @@
       },
       (error)=>{console.log(error)})
     }
-    // $('.songlist-detail').on('scroll',()=>{
-    // let offset = $('.songlist-detail .title').offset()
-    // console.log(offset)
-  // })
   })
   //全局的歌被点击时触发
   $('body').on('click','.site-song', e=>{
@@ -199,24 +277,15 @@
       'songId' : e.currentTarget.attributes[1].value,
       'className' : e.currentTarget.attributes[2].value
     }
-    let query = new AV.Query(hash['className'])
-    query.get(hash['songId']).then(
-      song=>{
-        console.log(song)
-        let name = song.attributes.name.split('.mp')
-        let singer = song.attributes.singer
-        let url = song.attributes.url
-        $('.player-index>span').text(`${name[0]}--${singer}`)
-        $('.player audio').attr('src',url)
-      }
-    )
+    localStorage.setItem('wangyimusic',JSON.stringify(hash))
     let url = `./player.html?className=${hash['className']}&&songId=${hash['songId']}`
-    // window.location.href = url
+    window.location.href = url
   })
   
   //搜索
   $('.search form').on('submit',(e)=>{
     e.preventDefault()
+    $('.class-recommend').addClass('hidden')
     $('#search-result').empty()
     let value = $('.search input')[0].value
     hash = ['name','singer']
@@ -225,6 +294,57 @@
     }
   }
 )
+$('.songList>.topNarBar>span').on('click',(e)=>{
+  let index = $(e.currentTarget).index()
+  let div = $('.songList>div')[index+1]
+  $(div).addClass('active').siblings().removeClass('active')
+})
+
+$('#like').on('click',()=>{
+  let text = $('.player-index>span').text()
+  if(text){
+    let hashlocalStorage = JSON.parse(localStorage.getItem('wangyimusic'))
+    let url = $('.player audio').attr('src')
+    let query1 = new AV.Query('Like')
+    query1.equalTo('url', url);
+    query1.find().then(song=>{
+      if(song.length === 0){
+        let query = new AV.Query(hashlocalStorage['className']);
+          query.get(hashlocalStorage['songId']).then( (song)=> {
+            let Like = AV.Object.extend('Like');
+            let like = new Like();
+            like.set('listName','like');
+            like.set('name',song.attributes.name)
+            like.set('singer',song.attributes.singer)
+            like.set('url',song.attributes.url)
+            like.save().then(song=> {
+              $('.like-selec>.like').addClass('active').siblings().removeClass('active')
+            }, (error)=> {
+              console.error(error);
+            });
+        }, (error)=> {
+          console.log(error)
+        });
+      }else{
+        let todo = AV.Object.createWithoutData('Like', song[0].id);
+        todo.destroy().then((success)=> {
+          $('.like-selec>.dislike').addClass('active').siblings().removeClass('active')
+          console.log(success)
+        }, (error)=> {
+          console.log(error)
+        });
+      }
+    },error=>{
+      console.log(error)
+    })
+    
+    
+    ////
+    
+}
+})
+
+
 function search(className,value){
   var query = new AV.Query('AllSongLists');
   query.find().then(

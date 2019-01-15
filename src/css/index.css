@@ -63,6 +63,18 @@ footer .player {
 footer .player span {
   padding: 0.0277777778rem 0.0555555556rem;
 }
+footer .player .like-selec .dislike {
+  display: none;
+}
+footer .player .like-selec .like {
+  display: none;
+}
+footer .player .like-selec .dislike.active {
+  display: inline;
+}
+footer .player .like-selec .like.active {
+  display: inline;
+}
 footer .player .player-index {
   flex: 1;
   text-align: center;
@@ -76,6 +88,18 @@ footer .player .player-index {
 footer .player .player-index span {
   padding: 0;
   transition: all 0.5s;
+}
+footer .player .footer-play .icon.start {
+  display: none;
+}
+footer .player .footer-play .icon.pause {
+  display: none;
+}
+footer .player .footer-play .icon.start.active {
+  display: inline;
+}
+footer .player .footer-play .icon.pause.active {
+  display: inline;
 }
 footer .menu {
   background: #202427;
@@ -144,7 +168,30 @@ section {
 }
 .home .lastestSong h1 {
   padding: 0.0277777778rem;
+  font-size: 0.0694444444rem;
 }
+.home .lastestSong .lastestSong-wrapper ul {
+  display: flex;
+  flex-direction: column;
+}
+.home .lastestSong .lastestSong-wrapper ul li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 0.0555555556rem;
+  margin-bottom: 0.0833333333rem;
+}
+.home .lastestSong .lastestSong-wrapper ul li img {
+  width: 0.5555555556rem;
+  height: 0.5555555556rem;
+}
+.home .lastestSong .lastestSong-wrapper ul li span {
+  font-size: 0.0555555556rem;
+  color: #F1F3F4;
+  padding-top: 0.0277777778rem;
+}
+
 .search {
   display: none;
 }
@@ -171,6 +218,33 @@ section {
   border: none;
   outline: none;
 }
+.search .class-recommend {
+  display: block;
+}
+.search .class-recommend h2 {
+  font-size: 0.0555555556rem;
+  padding-left: 0.0555555556rem;
+}
+.search .class-recommend ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0.0333333333rem;
+}
+.search .class-recommend ul li {
+  width: 0.4305555556rem;
+  height: 0.2083333333rem;
+  border-radius: 5px;
+  margin: 0.0152777778rem;
+}
+.search .class-recommend ul li span {
+  display: block;
+  padding: 0.0138888889rem 0.0138888889rem;
+  font-size: 0.0444444444rem;
+  font-weight: bold;
+}
+.search .class-recommend.hidden {
+  display: none;
+}
 
 .songList {
   display: none;
@@ -190,6 +264,24 @@ section {
   border-bottom: 3px solid green;
   color: white;
   transition: border-bottom 1s;
+}
+.songList .likeSong-page {
+  display: none;
+}
+.songList .art-page {
+  display: none;
+}
+.songList .albums-page {
+  display: none;
+}
+.songList .likeSong-page.active {
+  display: block;
+}
+.songList .art-page.active {
+  display: block;
+}
+.songList .albums-page.active {
+  display: block;
 }
 
 .songlist-detail {

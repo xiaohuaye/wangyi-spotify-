@@ -271,6 +271,25 @@ section {
 .songList .art-page {
   display: none;
 }
+.songList .art-page ul {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 0.0416666667rem;
+}
+.songList .art-page ul li {
+  display: flex;
+  align-items: center;
+}
+.songList .art-page ul li img {
+  width: 0.1944444444rem;
+  height: 0.1944444444rem;
+  border-radius: 50%;
+  margin: 0.0277777778rem;
+}
+.songList .art-page ul li span {
+  padding: 0.0833333333rem;
+}
 .songList .albums-page {
   display: none;
 }

@@ -87,13 +87,36 @@
       <span class="topNarBar-albums">专辑</span>
       <span class="topNarBar-likeSong">喜欢的歌</span>
     </div>
-    <div class="art-page"><ul></ul></div>
+    <div class="art-page active">
+      <ul>
+        <li class="site-songlist" data-songListId="zl67974fca6770">
+          <img src="http://pldcmrsc6.bkt.clouddn.com/20161209164303152140.jpg" alt="">
+          <span>林俊杰</span>
+        </li>
+        <li class="site-songlist" data-songListId="zl859b4e4b8c26">
+          <img src="http://pldcmrsc6.bkt.clouddn.com/4140d2c8-2f68-4825-8718-fdbc80282693.jpg" alt="">
+          <span>薛之谦</span>
+        </li>
+        <li class="site-songlist" data-songListId="zl521d97f3">
+          <img src="http://pldcmrsc6.bkt.clouddn.com/8c1a694ba72143a7a1199c09469f4f2f.jpeg" alt="">
+          <span>初音</span>
+        </li>
+        <li class="site-songlist" data-songListId="zl5b5971d559ff">
+          <img src="http://pldcmrsc6.bkt.clouddn.com/T001R300x300M000001pWERg3vFgg8.jpg" alt="">
+          <span>孙燕姿</span>
+        </li>
+        <li class="site-songlist" data-songListId="zl90937d2b68cb">
+          <img src="http://pldcmrsc6.bkt.clouddn.com/www.nwlg.net_2014531815.jpg" alt="">
+          <span>邓紫棋</span>
+        </li>
+      </ul>
+    </div>
     <div class="albums-page"><ul></ul></div>
     <div class="likeSong-page active"><ul></ul></div>
   </section>
   <section class="songlist-detail">
     <nav>
-      <span>返回</span>
+      <span class="back">返回</span>
       <span>喜欢</span>
     </nav>
     <img src="http://pjxo7l586.bkt.clouddn.com/109951163756018423.webp" alt="">
@@ -148,6 +171,11 @@
 <script src="./js/av-init.js"></script>
 
 <script>
+  $('.songlist-detail>nav>.back').on("click",(e)=>{
+    $('section').removeClass('active')
+    let section = $('section')
+    $(section[pageNumber]).addClass('active')
+  })
   //从本地获取上一次歌曲的信息
   let hashlocalStorage = JSON.parse(localStorage.getItem('wangyimusic') || '')
   let query = new AV.Query(hashlocalStorage['className'])
@@ -257,7 +285,15 @@
     }
   })
 //全局的歌单被点击时，触发
+var pageNumber
   $('body').on('click','.site-songlist', e=>{
+    for(let i = 0;i<3;i++){
+      let string = $('section')[i].className.split(' ')
+      if(string[1] === "active"){
+        pageNumber = i
+        break
+      }
+    }
     $('section').removeClass('active')
     let section = $('section')
     $(section[3]).addClass('active')

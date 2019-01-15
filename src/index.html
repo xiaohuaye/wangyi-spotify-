@@ -83,13 +83,13 @@
   </section>
   <section class="songList">
     <div class="topNarBar">
-      <span class="active">喜欢的歌</span>
-      <span>艺术家</span>
-      <span>专辑</span>
+      <span class="topNarBar-art active">艺术家</span>
+      <span class="topNarBar-albums">专辑</span>
+      <span class="topNarBar-likeSong">喜欢的歌</span>
     </div>
-    <div class="likeSong-page active">1</div>
-    <div class="art-page">2</div>
-    <div class="albums-page">3</div>
+    <div class="art-page"><ul></ul></div>
+    <div class="albums-page"><ul></ul></div>
+    <div class="likeSong-page active"><ul></ul></div>
   </section>
   <section class="songlist-detail">
     <nav>
@@ -148,18 +148,36 @@
 <script src="./js/av-init.js"></script>
 
 <script>
+  //从本地获取上一次歌曲的信息
   let hashlocalStorage = JSON.parse(localStorage.getItem('wangyimusic') || '')
   let query = new AV.Query(hashlocalStorage['className'])
-    query.get(hashlocalStorage['songId']).then(
-      song=>{
-        let name = song.attributes.name.split('.mp')
-        let singer = song.attributes.singer
-        let url = song.attributes.url
-        $('.player-index>span').text(`${name[0]}--${singer}`)
-        $('.player audio').attr('src',url)
-      }
-    )
-
+  query.get(hashlocalStorage['songId']).then(
+    song=>{
+      let name = song.attributes.name.split('.mp')
+      let singer = song.attributes.singer
+      let url = song.attributes.url
+      $('.player-index>span').text(`${name[0]}--${singer}`)
+      $('.player audio').attr('src',url)
+    }
+  ).then(()=>{
+    let text = $('.player-index>span').text()
+    if(text){
+      let hashlocalStorage = JSON.parse(localStorage.getItem('wangyimusic'))
+      let url = $('.player audio').attr('src')
+      let query1 = new AV.Query('Like')
+      query1.equalTo('url', url);
+      query1.find().then(song=>{
+        if(song.length !== 0){
+          $('.like-selec>.like').addClass('active').siblings().removeClass('active')
+        }else{
+          $('.like-selec>.dislike').addClass('active').siblings().removeClass('active')
+        }
+      })
+    }  
+  }
+)
+  
+  
   let query2 = new AV.Query('zl65b06b4c535566f2');
       query2.find().then((songlists)=> {
         let lidom = songlists.map(songlist=>{
@@ -298,6 +316,9 @@ $('.songList>.topNarBar>span').on('click',(e)=>{
   let index = $(e.currentTarget).index()
   let div = $('.songList>div')[index+1]
   $(div).addClass('active').siblings().removeClass('active')
+  if(index === 2){
+    render()
+  }
 })
 
 $('#like').on('click',()=>{
@@ -319,6 +340,7 @@ $('#like').on('click',()=>{
             like.set('url',song.attributes.url)
             like.save().then(song=> {
               $('.like-selec>.like').addClass('active').siblings().removeClass('active')
+              render()
             }, (error)=> {
               console.error(error);
             });
@@ -330,19 +352,41 @@ $('#like').on('click',()=>{
         todo.destroy().then((success)=> {
           $('.like-selec>.dislike').addClass('active').siblings().removeClass('active')
           console.log(success)
+          render()
         }, (error)=> {
           console.log(error)
         });
       }
     },error=>{
       console.log(error)
-    })
-    
-    
-    ////
-    
-}
+    }) 
+  }
 })
+
+function render(){
+  let query5 = new AV.Query('Like');
+  query5.find().then((songlists)=> {
+    let lidom =  songlists.map(songlist=>{
+      if(songlist.attributes.url){
+        let name = songlist.attributes.name.split('.mp')
+        let $li = $('<li class="site-song"></li>').attr(
+          {'data-song-id': songlist.id,
+          'data-songlistName': 'Like'
+      })
+        let $span1 = $('<span></span>').text(name[0])
+        let $span2 = $('<span></span>').text(songlist.attributes.singer)
+        $($li).append($span1).append($span2)
+        return $li
+      }
+    })
+  $('.likeSong-page>ul').empty()
+  lidom.map(song=>{
+    $('.likeSong-page>ul').append(song)
+  })
+},
+(error)=>{console.log(error)})
+}
+
 
 
 function search(className,value){

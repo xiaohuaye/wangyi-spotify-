@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>网易云音乐手机端（spotify风格）</title>
   <link rel="stylesheet" href="./css/index.css">
-  <script src="//at.alicdn.com/t/font_997722_2yqkrb23r22.js"></script>
+  <script src="//at.alicdn.com/t/font_997722_908aa94hq19.js"></script>
   <script>
       var pageWidth = window.innerWidth;
       document.write('<style>html{font-size:'+pageWidth+'px;}</style>')
@@ -116,8 +116,15 @@
   </section>
   <section class="songlist-detail">
     <nav>
-      <span class="back">返回</span>
-      <span>喜欢</span>
+      <span class="back">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-tubiaozhizuomoban-"></use>
+      </svg></span>
+      <span>
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-help"></use>
+      </svg>
+    </span>
     </nav>
     <img src="http://pjxo7l586.bkt.clouddn.com/109951163756018423.webp" alt="">
     <div class="title"></div>
@@ -132,9 +139,9 @@
         <svg class="icon like" aria-hidden="true">
             <use xlink:href="#icon-xihuan1"></use>
         </svg>
-    </span>
+      </span>
       <audio src=""></audio>
-      <a href="./player.html" class="player-index"><span></span></a>
+      <a href="#" class="player-index"><span></span></a>
       <span id="footer-play" class="footer-play">
         <svg class="icon start active" aria-hidden="true">
           <use xlink:href="#icon-bofang2"></use>
@@ -171,6 +178,35 @@
 <script src="./js/av-init.js"></script>
 
 <script>
+  // $('footer>.player>a').on('click',()=>{
+  //   e.preventDefault()
+  //   localStorage.getItem('wangyimusic')
+  //   let url = `./player.html?className=${hash['className']}&&songId=${hash['songId']}`
+  //   console.log(url)
+  //   window.location.href = url
+  // })
+
+
+  $('body').on('touchstart','.site-song',handleStart)
+  $('body').on('touchend','.site-song',handleEnd)
+  function handleStart(e){
+    $(e.currentTarget).addClass('active').siblings().removeClass('active')
+  }
+  function handleEnd(e){
+    $(e.currentTarget).removeClass('active')      
+  }
+
+
+  $('.songlist-detail').on('scroll',(e)=>{
+    topSonglistDetailChange = $('.songlist-detail img').offset()
+    if(topSonglistDetail.top >= (topSonglistDetailChange.top + 10)){
+      $('.songlist-detail nav').css('background-color','#191911')
+    }
+    else{
+      $('.songlist-detail nav').css('background-color','rgba(0,0,0,0.2)')
+    }
+  })
+
   $('.songlist-detail>nav>.back').on("click",(e)=>{
     $('section').removeClass('active')
     let section = $('section')
@@ -184,8 +220,10 @@
       let name = song.attributes.name.split('.mp')
       let singer = song.attributes.singer
       let url = song.attributes.url
+      let Aurl = `./player.html?className=${hashlocalStorage['className']}&&songId=${hashlocalStorage['songId']}`
       $('.player-index>span').text(`${name[0]}--${singer}`)
       $('.player audio').attr('src',url)
+      $('.player a').attr('href',Aurl)
     }
   ).then(()=>{
     let text = $('.player-index>span').text()
@@ -286,6 +324,7 @@
   })
 //全局的歌单被点击时，触发
 var pageNumber
+var topSonglistDetail
   $('body').on('click','.site-songlist', e=>{
     for(let i = 0;i<3;i++){
       let string = $('section')[i].className.split(' ')
@@ -297,6 +336,7 @@ var pageNumber
     $('section').removeClass('active')
     let section = $('section')
     $(section[3]).addClass('active')
+    topSonglistDetail = $('.songlist-detail img').offset()
     let listId = e.currentTarget.attributes[1].nodeValue
     if(listId){
       let query = new AV.Query(listId);
@@ -333,6 +373,7 @@ var pageNumber
     }
     localStorage.setItem('wangyimusic',JSON.stringify(hash))
     let url = `./player.html?className=${hash['className']}&&songId=${hash['songId']}`
+    console.log(url)
     window.location.href = url
   })
   

@@ -279,6 +279,25 @@ section{
   }
   .albums-page{
     display: none;
+    ul{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      padding-top: px2rem(15px);
+      li{
+        display: flex;
+        align-items: center;
+        img{
+          width: px2rem(70px);
+          height: px2rem(70px);
+          border-radius: 50%;
+          margin: px2rem(10px);
+        }
+        span{
+          padding: px2rem(30px);
+        }
+      }
+    }
   }
   .likeSong-page.active{
     display: block;

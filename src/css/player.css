@@ -47,6 +47,29 @@ body {
   z-index: -2;
   color: white;
 }
+body audio {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+body .lry {
+  width: 0.5555555556rem;
+  margin: auto;
+  height: 0.2222222222rem;
+  text-align: center;
+}
+body .point {
+  position: absolute;
+  width: 0.25rem;
+  z-index: 4;
+  right: 0.2777777778rem;
+  top: -0.0277777778rem;
+  transition: all 0.4s linear;
+}
+body .point.close {
+  transform-origin: top left;
+  transform: rotateZ(-25deg);
+}
 body .mask {
   position: absolute;
   width: 100vw;
@@ -55,14 +78,56 @@ body .mask {
   z-index: -1;
 }
 body .top {
-  text-align: center;
-  padding-top: 0.0277777778rem;
+  text-align: left;
+  padding: 0.0277777778rem;
+  display: flex;
+  justify-content: space-between;
 }
-body .lry {
+body .top .back {
+  font-size: 0.0555555556rem;
+}
+body .pan {
   width: 0.8333333333rem;
-  border: 1px solid red;
   height: 0.8333333333rem;
-  margin: 0.0277777778rem auto;
+  margin: 0.0388888889rem auto 0.0555555556rem;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+}
+body .pan .out {
+  width: 0.8333333333rem;
+  height: 0.8333333333rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+body .pan .light {
+  width: 0.8333333333rem;
+  height: 0.8333333333rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+}
+body .pan .light.active {
+  animation: animal 10s infinite linear;
+}
+@keyframes animal {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+body .pan .default {
+  position: absolute;
+  width: 0.5277777778rem;
+  height: 0.5277777778rem;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, 29%);
+  z-index: -1;
 }
 body .song {
   display: flex;
@@ -70,7 +135,71 @@ body .song {
   align-items: center;
   flex-direction: column;
 }
-body .player .pass-wrapper {
+body .song .songName {
+  display: inline-block;
+  font-size: 0.0555555556rem;
+  margin: 0.0138888889rem auto 0.0277777778rem;
+}
+body .song .singer {
+  display: inline-block;
+  margin-bottom: 0.0277777778rem;
+}
+body .player {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+body .player .contral {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.0277777778rem;
+}
+body .player .contral .danqu {
+  font-size: 0.1388888889rem;
+  fill: #ADADAD;
+}
+body .player .contral .danqu.active {
+  fill: green;
+}
+body .player .contral .like-selec .icon {
+  font-size: 0.0694444444rem;
+  margin-left: 0.0277777778rem;
+}
+body .player .contral .like-selec .dislike {
+  display: none;
+}
+body .player .contral .like-selec .like {
+  display: none;
+}
+body .player .contral .like-selec .dislike.active {
+  display: inline;
+}
+body .player .contral .like-selec .like.active {
+  display: inline;
+}
+body .player .contral .bofang, body .player .contral .zanting {
+  display: none;
+  font-size: 0.1111111111rem;
+}
+body .player .contral .bofang.active, body .player .contral .zanting.active {
+  display: inline;
+}
+body .player .passBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+body .player .passBar .currentTime {
+  font-size: 0.0333333333rem;
+  padding-left: 0.0277777778rem;
+}
+body .player .passBar .totalTime {
+  font-size: 0.0333333333rem;
+  padding-right: 0.0277777778rem;
+}
+body .player .passBar .pass-wrapper {
   width: 0.6666666667rem;
   height: 0.0083333333rem;
   background: #ADADAD;
@@ -78,7 +207,7 @@ body .player .pass-wrapper {
   position: relative;
   border-radius: 3px;
 }
-body .player .pass-wrapper .pass {
+body .player .passBar .pass-wrapper .pass {
   width: 0%;
   height: 100%;
   position: absolute;

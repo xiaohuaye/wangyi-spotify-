@@ -10,36 +10,118 @@
       document.write("<style>html{font-size:" + pageWidth + "px;}</style>");
     </script>
     <link rel="stylesheet" href="./css/player.css" />
+    <script src="//at.alicdn.com/t/font_997722_0yuilos6wox.js"></script>
   </head>
   <body>
+      <img class="point close" src="../pic/needle-ip6.png" alt=""> 
     <div class="mask"></div>
     <div class="top">
-      <div>正在播放歌单</div>
-      <h1></h1>
+        <span>
+          <svg class="back icon" aria-hidden="true">
+              <use xlink:href="#icon-tubiaozhizuomoban-"></use>
+          </svg>
+        </span>
+        <span>
+          <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-wangyiyunyinle-copy"></use>
+          </svg>网易云音乐</span>
     </div>
-    <div class="lry"></div>
+    <div class="pan">
+        <img class="out" src="../pic/disc-ip6.png" alt="">
+        <img class="light" src="../pic/disc_light-ip6.png" alt="">
+        <img class="default"  src="../pic/disc_default.png" alt="">
+        
+    </div>
     <div class="song">
       <span class="songName"></span>
       <span class="singer"></span>
     </div>
+    <div class="lry">暂无歌词</div>
     <div class="player">
-      <span>收藏</span> <span>前一首</span> <span id="pause">播放/暂停</span>
-      <span>下一首</span> <span>单曲循环/随机播放</span>
       <div class="passBar">
         <span class="currentTime">00:00</span>
         <div class="pass-wrapper"><div class="pass"></div></div>
         <span class="totalTime">00:00</span>
       </div>
+      <div class="contral">
+          <span id="like" class="like-selec">
+              <svg class="icon dislike active" aria-hidden="true">
+                <use xlink:href="#icon-xihuan"></use>
+              </svg>
+              <svg class="icon like" aria-hidden="true">
+                  <use xlink:href="#icon-xihuan1"></use>
+              </svg>
+          </span>
+          <span id="pause">
+            <svg class="zanting icon" aria-hidden="true">
+              <use xlink:href="#icon-zanting"></use>
+            </svg>
+            <svg class="bofang active icon" aria-hidden="true">
+                <use xlink:href="#icon-bofang"></use>
+            </svg>
+          </span>
+          <span id="loop">
+            <svg class="danqu active icon" aria-hidden="true">
+              <use xlink:href="#icon-danquxunhuan"></use>
+            </svg>
+          </span>
+      </div>
     </div>
-    <audio src="" controls ></audio>
+    <audio src="" loop></audio>
   </body>
   <script src="../vendor/jquery.min.js"></script>
   <script src="../vendor/av-min.js"></script>
   <script src="./js/av-init.js"></script>
   <script>
+    var isloop = true
+    $('.top .back').on('click',()=>{
+      window.history.go(-1)
+    })
+
+    $('#like').on('click',()=>{
+      console.log(1)
+        let hashlocalStorage = JSON.parse(localStorage.getItem('wangyimusic'))
+        let url = $('audio').attr('src')
+        let query1 = new AV.Query('Like')
+        query1.equalTo('url', url);
+        query1.find().then(song=>{
+          console.log(song.length)
+          if(song.length === 0){
+            let query = new AV.Query(hashlocalStorage['className']);
+              query.get(hashlocalStorage['songId']).then( (song)=> {
+                let Like = AV.Object.extend('Like');
+                let like = new Like();
+                like.set('listName','like');
+                like.set('name',song.attributes.name)
+                like.set('singer',song.attributes.singer)
+                like.set('url',song.attributes.url)
+                like.save().then(song=> {
+                  $('.like-selec>.like').addClass('active').siblings().removeClass('active')
+                  render()
+                }, (error)=> {
+                  console.error(error);
+                });
+            }, (error)=> {
+              console.log(error)
+            });
+          }else{
+            let todo = AV.Object.createWithoutData('Like', song[0].id);
+            todo.destroy().then((success)=> {
+              $('.like-selec>.dislike').addClass('active').siblings().removeClass('active')
+              console.log(success)
+              render()
+            }, (error)=> {
+              console.log(error)
+            });
+          }
+        },error=>{
+          console.log(error)
+        }) 
+
+    })
+
     function GetRequest() {
       var url = location.search; //获取url中"?"符后的字串
-      console.log(url);
       var theRequest = new Object();
       if (url.indexOf("?") != -1) {
         var str = url.substr(1);
@@ -48,14 +130,24 @@
           theRequest[strs[i].split("=")[0]] = decodeURI(strs[i].split("=")[1]);
         }
       }
-      console.log(theRequest);
       var query = new AV.Query(theRequest.className);
       query.get(theRequest.songId).then(
       (todo)=> {
-        console.log(todo.attributes)
+        let name = todo.attributes.name.split('.mp')
         $('audio').attr('src',todo.attributes.url)
-        $('.song .songName').text(todo.attributes.name)
+        $('.song .songName').text(name[0])
         $('.song .singer').text(todo.attributes.singer)
+        let hashlocalStorage = JSON.parse(localStorage.getItem('wangyimusic'))
+        let url = $('body audio').attr('src')
+        let query1 = new AV.Query('Like')
+        query1.equalTo('url', url);
+        query1.find().then(song=>{
+          if(song.length !== 0){
+            $('.like-selec>.like').addClass('active').siblings().removeClass('active')
+          }else{
+            $('.like-selec>.dislike').addClass('active').siblings().removeClass('active')
+          }
+        })
       },
         function(error) {
           console.log(error);
@@ -66,10 +158,22 @@
         e.map((songlistName)=>{
           let ObjectName = songlistName.attributes.ObjectName
           let listName = songlistName.attributes.songListName
-          if( ObjectName === theRequest.className){
-            $('.top h1').text(listName)
-          }
         })
+      })
+      
+      $('#loop').on('click',()=>{
+        if(isloop){
+          let audio = $('audio')[0]
+          $($(audio)[0]).removeAttr('loop')
+          isloop = false
+          $('.danqu').removeClass('active')
+        }else{
+          console.log(1)
+          let audio = $('audio')[0]
+          $($(audio)[0]).attr('loop','true')
+          isloop = true
+          $('.danqu').addClass('active')
+        }
       })
       $('audio').on('loadedmetadata',()=>{
         let audio = $('audio')
@@ -96,6 +200,16 @@
       }) 
       return theRequest;
     }
+    $($('body audio')[0]).on('ended',()=>{
+      console.log(isloop)
+      if(!isloop){
+        console.log(1)
+        $('audio')[0].currentTime = 0
+        $('#pause').click()
+      }
+        
+     
+    })
     GetRequest();
     let taggle = false
     $('#pause').on('click',()=>{
@@ -103,9 +217,17 @@
       if(!taggle){
         audio[0].play()
         taggle = true
+        $('.player .zanting').addClass('active')
+        $('.player .bofang').removeClass('active')
+        $('.pan .light').addClass('active')
+        $('.point').removeClass('close')     
       }else{
         audio[0].pause()
         taggle = false
+        $('.player .bofang').addClass('active')
+        $('.player .zanting').removeClass('active')
+        $('.pan .light').removeClass('active')
+        $('.point').addClass('close')   
       }
     })
   </script>

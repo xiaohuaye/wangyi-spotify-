@@ -27,6 +27,29 @@ body{
   font-size: px2rem(16px);
   z-index: -2;
   color: white;
+  audio{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+  .lry{
+    width: px2rem(200px);
+    margin: auto;
+    height: px2rem(80px);
+    text-align: center;
+  }
+  .point{
+    position: absolute;
+    width: px2rem(90px);
+    z-index: 4;
+    right: px2rem(100px);
+    top: px2rem(-10px);
+    transition: all 0.4s linear;
+  }
+  .point.close{
+    transform-origin: top left;
+    transform: rotateZ(-25deg);
+  }
   .mask{
     position: absolute;
     width: 100vw;
@@ -35,37 +58,146 @@ body{
     z-index: -1;
   }
   .top{
-    text-align: center;
-    padding-top: px2rem(10px);
+    text-align: left;
+    padding: px2rem(10px);
+    display: flex;
+    justify-content: space-between;
+    .back{
+      font-size: px2rem(20px);
+    }
   }
-  .lry{
+  .pan{
     width: px2rem(300px);
-    border: 1px solid red;
     height: px2rem(300px);
-    margin: px2rem(10px) auto;
+    margin: px2rem(14px) auto px2rem(20px);
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    .out{
+      width: px2rem(300px);
+      height: px2rem(300px);
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .light{
+      width: px2rem(300px);
+      height: px2rem(300px);
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 3;
+    }
+    .light.active{
+      animation: animal 10s infinite linear;
+    }
+    @keyframes animal {
+      0%{
+        transform: rotate(0deg);
+      }
+      100%{
+        transform: rotate(360deg);
+      }
+    }
+    .default{
+      position: absolute;
+      width: px2rem(190px);
+      height: px2rem(190px);
+      left: 50%;
+      right: 50%;
+      transform: translate(-50%,29%);
+      z-index: -1;
+    }
+    
   }
   .song{
    display: flex;
    justify-content: center;
    align-items: center;
    flex-direction: column;
+   .songName{
+     display: inline-block;
+     font-size: px2rem(20px);
+     margin: px2rem(5px) auto px2rem(10px);
+   }
+   .singer{
+     display: inline-block;
+     margin-bottom: px2rem(10px);
+   }
   }
   .player{
-    .pass-wrapper{
-      width: px2rem(240px);
-      height: px2rem(3px);
-      background: #ADADAD;
-      margin: px2rem(10px);
-      position: relative;
-      border-radius: 3px;
-      .pass{
-        width: 0%;
-        height: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        background: black;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    .contral{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: px2rem(10px);
+      .danqu{
+        font-size: px2rem(50px);
+        fill: #ADADAD;
+      }
+      .danqu.active{
+        fill: green;
+      }
+      .like-selec{
+        .icon{
+          font-size: px2rem(25px);
+          margin-left: px2rem(10px);
+        }
+        .dislike{
+          display: none;
+        }
+        .like{
+          display: none;
+        }
+        .dislike.active{
+          display: inline;
+        }
+        .like.active{
+          display: inline;
+        }
+      }
+      .bofang,.zanting{
+        display: none;
+        font-size: px2rem(40px);
+      }
+      .bofang.active,.zanting.active{
+        display: inline;
+      }
+
+    }
+    
+    .passBar{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      .currentTime{
+        font-size: px2rem(12px);
+        padding-left: px2rem(10px);
+      }
+      .totalTime{
+        font-size: px2rem(12px);
+        padding-right: px2rem(10px);
+      }
+      .pass-wrapper{
+        width: px2rem(240px);
+        height: px2rem(3px);
+        background: #ADADAD;
+        margin: px2rem(10px);
+        position: relative;
         border-radius: 3px;
+        .pass{
+          width: 0%;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          background: black;
+          border-radius: 3px;
+        }
       }
     }
   }

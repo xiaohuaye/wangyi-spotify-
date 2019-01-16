@@ -224,6 +224,14 @@ section{
   .class-recommend.hidden{
     display: none;
   }
+  .search-result{
+    li{
+      font-size: px2rem(16px);
+      display: flex;
+      flex-direction: column;
+      padding: px2rem(10px) px2rem(15px);
+    }
+  }
 }
 .songList{
   display: none;

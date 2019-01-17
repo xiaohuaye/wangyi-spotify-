@@ -350,11 +350,15 @@ section {
 .songlist-detail nav span {
   padding: 0.0277777778rem;
 }
-.songlist-detail img {
+.songlist-detail .songlist-d-img {
   width: 0.4444444444rem;
   height: 0.4444444444rem;
   display: block;
   margin: 0.3333333333rem auto 0.0833333333rem;
+}
+.songlist-detail .songlist-d-img img {
+  width: 100%;
+  height: 100%;
 }
 .songlist-detail .title h1 {
   font-size: 0.0694444444rem;

@@ -332,12 +332,17 @@ section{
       padding: px2rem(10px);
     }
   }
-  img{
+  .songlist-d-img{
     width: px2rem(160px);
     height: px2rem(160px);
     display: block;
     margin: px2rem(120px) auto px2rem(30px);
+    img{
+      width: 100%;
+      height: 100%;
+    }
   }
+  
   .title{
     h1{
       font-size: px2rem(25px);

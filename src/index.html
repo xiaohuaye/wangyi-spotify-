@@ -18,28 +18,16 @@
       <h1>特别推荐</h1>
       <ul class="recommend-wrapper">
         <li class="site-songlist" data-songListId="zl7b2c36315c4a683c83b17f8e595663d0540d540d5355">
-          <img src="http://pldcmrsc6.bkt.clouddn.com/109951163575057615.webp" alt="">
-          <span>第61届格莱美奖提名名单</span>
         </li>
         <li class="site-songlist" data-songListId="zl9cb84e9197f365484e0e753597f3">
-          <img src="http://pldcmrsc6.bkt.clouddn.com/109951163662814383.webp" alt="">
-          <span>鲸云音效与电音</span>
         </li>
         <li class="site-songlist" data-songListId="zl90a34e9b8d855e26611f768482f165876b4c66f2">
-          <img src="http://pldcmrsc6.bkt.clouddn.com/109951163731947006.webp" alt="">
-          <span>那些超带感的英文歌曲</span>
         </li>
         <li class="site-songlist" data-songListId="zl5b899759768465e58bed6b4c">
-          <img src="http://pldcmrsc6.bkt.clouddn.com/109951163756018423.webp" alt="">
-          <span>安静的日语歌</span>
         </li>
         <li class="site-songlist" data-songListId="zl57307403774096468ba15212">
-          <img src="http://pldcmrsc6.bkt.clouddn.com/109951163763955468.webp" alt="">
-          <span>地球着陆计划</span>
         </li>
         <li class="site-songlist" data-songListId="zl572859166f026cca">
-          <img src="http://pldcmrsc6.bkt.clouddn.com/109951163769386329.jpg" alt="">
-          <span>在外漂泊</span>
         </li>
       </ul>
     </div>
@@ -133,7 +121,8 @@
       </svg>
     </span>
     </nav>
-    <img src="http://pldcmrsc6.bkt.clouddn.com/109951163756018423.webp" alt="">
+    <div id="songlist-d-img" class="songlist-d-img">
+    </div>
     <div class="title"></div>
     <ul></ul>
   </section>
@@ -197,6 +186,21 @@ function init(){
     $(e.currentTarget).removeClass('active')      
   }
 
+  hashSongList = $('.recommend-wrapper .site-songlist')
+  for(let i = 0;i<hashSongList.length;i++){
+   let tag = $(hashSongList[i])[0]
+   let className = $(hashSongList[i])[0].attributes[1].value
+   let query8 = new AV.Query(className)
+   query8.startsWith('imgURL','http')
+   query8.find().then(img=>{
+    let name = img[0].attributes.listName
+    let spantag = $('<span></span>').text(name)
+    let imgURL = img[0].attributes.imgURL
+    let imgtag = $('<img />').attr('src',imgURL)
+    $(tag).append(imgtag).append(spantag)
+   })
+  }
+
   //从本地获取上一次歌曲的信息
   let Local = localStorage.getItem('wangyimusic')
   if(Local){
@@ -237,7 +241,10 @@ function init(){
 
 
   $('.songlist-detail').on('scroll',(e)=>{
-    topSonglistDetailChange = $('.songlist-detail img').offset()
+    topSonglistDetailChange = $('.songlist-detail #songlist-d-img').offset()
+    console.log(topSonglistDetail.top)
+    console.log(topSonglistDetailChange.top)
+
     if(topSonglistDetail.top >= (topSonglistDetailChange.top + 10)){
       $('.songlist-detail nav').css('background-color','#191911')
     }
@@ -346,7 +353,7 @@ var topSonglistDetail
     $('section').removeClass('active')
     let section = $('section')
     $(section[3]).addClass('active')
-    topSonglistDetail = $('.songlist-detail img').offset()
+    topSonglistDetail = $('.songlist-detail #songlist-d-img').offset()
     let listId = e.currentTarget.attributes[1].nodeValue
     if(listId){
       let query = new AV.Query(listId);
@@ -364,7 +371,10 @@ var topSonglistDetail
             return $li
           }else if(songlist.attributes.listName){
             let h1 = $('<h1></h1>').text(songlist.attributes.listName)
+            let imgURL = songlist.attributes.imgURL
+            let imgtag = $('<img />').attr('src',imgURL)
             $('.title').empty().append(h1)
+            $('#songlist-d-img').empty().append(imgtag)
           }
         })
         $('.songlist-detail>ul').empty()

@@ -13,7 +13,10 @@
     <script src="//at.alicdn.com/t/font_997722_0yuilos6wox.js"></script>
   </head>
   <body>
-      <img class="point close" src="../pic/needle-ip6.png" alt=""> 
+    <img class="point close" src="../pic/needle-ip6.png" alt="">
+    <div class="background">
+      <img src="" alt="">
+    </div>
     <div class="mask"></div>
     <div class="top">
         <span>
@@ -130,6 +133,26 @@
           theRequest[strs[i].split("=")[0]] = decodeURI(strs[i].split("=")[1]);
         }
       }
+      if(theRequest.className !== 'zl65b06b4c535566f2'){
+        let queryimgURL = new AV.Query(theRequest.className)
+        queryimgURL.startsWith('imgURL', 'http');
+        queryimgURL.find().then(imgURL => {
+          let imgURLreplace = imgURL[0].attributes.imgURL
+          $('.pan .default').attr('src',imgURLreplace)
+          $('.background img').attr('src',imgURLreplace)
+        })
+      }else if(theRequest.className === 'zl65b06b4c535566f2'){
+        var query = new AV.Query(theRequest.className);
+        query.get(theRequest.songId).then(
+          imgURL => {
+          let imgURLreplace = imgURL.attributes.imgURL
+          $('.pan .default').attr('src',imgURLreplace)
+          $('.background img').attr('src',imgURLreplace)          
+        })
+      }else{
+        $('.background img').attr('src','../../pic/1.jpg')
+      }
+      
       var query = new AV.Query(theRequest.className);
       query.get(theRequest.songId).then(
       (todo)=> {

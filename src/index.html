@@ -113,12 +113,16 @@
     <div class="likeSong-page active"><ul></ul></div>
   </section>
   <section class="songlist-detail">
+    <div class="inf">
+      <p>有问题请联系我，我的qq：908347816，也可发邮箱908347816@qq.com</p>
+      <p>点击任意地方返回</p>
+      </div>
     <nav>
       <span class="back">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-tubiaozhizuomoban-"></use>
       </svg></span>
-      <span>
+      <span class="help">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-help"></use>
       </svg>
@@ -181,8 +185,8 @@
   init()
 function init(){
   // 初始化
-  var vConsole = new VConsole();
-  console.log('Hello world');
+  // var vConsole = new VConsole();
+  // console.log('Hello world');
   //设置触摸效果
   $('body').on('touchstart','.site-song',handleStart)
   $('body').on('touchend','.site-song',handleEnd)
@@ -303,45 +307,9 @@ function init(){
   $('.songList>.topNarBar>span').on('click',e=>{
     $(e.currentTarget).addClass('active').siblings().removeClass('active')
   })
-  let taggle = false
-  let time
-  $('#footer-play').on('click',()=>{
-    let aWidth = $('.player-index').width()
-    let sWidth = $('.player-index>span').width()
-    if($('.player audio').attr('src')){
-      if(time){
-        clearInterval(time)
-        $('.player-index>span').css('display',`none`)
-        setTimeout(()=>{
-                $('.player-index>span').css('display','inline')
-                $('.player-index>span').css('margin-left',`0px`)
-              },100)
-      }
-    let audio = $('audio')
-      if(!taggle){
-        audio[0].play()
-        taggle = true
-        $('#footer-play>.pause').addClass('active').siblings().removeClass('active')
-        if(aWidth<sWidth){
-          let n = 0
-          time = setInterval(() => {
-            $('.player-index>span').css('margin-left',`${n}px`)
-            if((-n/2)>sWidth){
-              $('.player-index>span').css('display','none')
-              n = sWidth
-              setTimeout(()=>{
-                $('.player-index>span').css('display','inline')
-              },100)
-            }else{n = n - 3}
-          },100) 
-        }
-      }else{
-        audio[0].pause()
-        taggle = false
-        $('#footer-play>.start').addClass('active').siblings().removeClass('active')
-      }
-    }
-  })
+  var taggle = false
+  var time
+  play()
 //全局的歌单被点击时，触发
 var pageNumber
 var topSonglistDetail
@@ -353,6 +321,12 @@ var topSonglistDetail
         break
       }
     }
+    $('.help').on('click',()=>{
+      $('.inf').addClass('active')
+      $('.inf').on('click',()=>{
+        $('.inf').removeClass('active')
+      })
+    })
     $('section').removeClass('active')
     let section = $('section')
     $(section[3]).addClass('active')
@@ -389,16 +363,7 @@ var topSonglistDetail
     }
   })
   //全局的歌被点击时触发
-  $('body').on('click','.site-song', e=>{
-    let hash = {
-      'songId' : e.currentTarget.attributes[1].value,
-      'className' : e.currentTarget.attributes[2].value
-    }
-    localStorage.setItem('wangyimusic',JSON.stringify(hash))
-    let url = `./player.html?className=${hash['className']}&&songId=${hash['songId']}`
-    writeSongToPlayer()
-    window.location.href = url
-  })
+  
   
   //搜索
   $('.search form').on('submit',(e)=>{
@@ -489,7 +454,25 @@ function render(){
 (error)=>{console.log(error)})
 }
 
-
+$('body').on('click','.site-song', e=>{
+    let hash = {
+      'songId' : e.currentTarget.attributes[1].value,
+      'className' : e.currentTarget.attributes[2].value
+    }
+    localStorage.setItem('wangyimusic',JSON.stringify(hash))
+    let url = `./player.html?className=${hash['className']}&&songId=${hash['songId']}`
+    writeSongToPlayer()
+    let audio = $('audio')
+      if(!taggle){
+        
+        setTimeout(()=>{
+          $('#footer-play').click()
+          audio[0].play()},2000)
+      }else{
+        setTimeout(()=>{audio[0].play()},2000)        
+      }
+    
+  })
 
 function search(className,value){
   var query = new AV.Query('AllSongLists');
@@ -520,6 +503,46 @@ function search(className,value){
         
       })
     })
+}
+
+function play(){
+  $('#footer-play').on('click',()=>{
+    let aWidth = $('.player-index').width()
+    let sWidth = $('.player-index>span').width()
+    if($('.player audio').attr('src')){
+      if(time){
+        clearInterval(time)
+        $('.player-index>span').css('display',`none`)
+        setTimeout(()=>{
+                $('.player-index>span').css('display','inline')
+                $('.player-index>span').css('margin-left',`0px`)
+              },100)
+      }
+    let audio = $('audio')
+      if(!taggle){
+        audio[0].play()
+        taggle = true
+        $('#footer-play>.pause').addClass('active').siblings().removeClass('active')
+        if(aWidth<sWidth){
+          let n = 0
+          time = setInterval(() => {
+            $('.player-index>span').css('margin-left',`${n}px`)
+            if((-n/2)>sWidth){
+              $('.player-index>span').css('display','none')
+              n = sWidth
+              setTimeout(()=>{
+                $('.player-index>span').css('display','inline')
+              },100)
+            }else{n = n - 3}
+          },100) 
+        }
+      }else{
+        audio[0].pause()
+        taggle = false
+        $('#footer-play>.start').addClass('active').siblings().removeClass('active')
+      }
+    }
+  })
 }
 
 function writeSongToPlayer(){

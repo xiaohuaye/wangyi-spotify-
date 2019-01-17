@@ -236,8 +236,14 @@
      
     })
     GetRequest();
-    let taggle = false
+    var taggle = false
     $('#pause').on('click',()=>{
+      playAndPause()
+    })
+    $('.light').on('click',()=>{
+      playAndPause()
+    })
+    function playAndPause(){
       let audio = $('audio')
       if(!taggle){
         audio[0].play()
@@ -254,6 +260,6 @@
         $('.pan .light').removeClass('active')
         $('.point').addClass('close')   
       }
-    })
+    }
   </script>
 </html>

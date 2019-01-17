@@ -299,8 +299,29 @@ section {
 .songlist-detail {
   display: none;
 }
+.songlist-detail .inf {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: black;
+  font-size: 0.0444444444rem;
+  color: white;
+  z-index: 5;
+}
+.songlist-detail .inf p {
+  width: 0.5555555556rem;
+}
+.songlist-detail .inf.active {
+  display: flex;
+}
 .songlist-detail nav {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -308,6 +329,7 @@ section {
   justify-content: space-between;
   background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.5);
+  z-index: 3;
 }
 .songlist-detail nav span {
   padding: 0.0277777778rem;
@@ -325,6 +347,9 @@ section {
 .songlist-detail .title h1 {
   font-size: 0.0694444444rem;
   text-align: center;
+}
+.songlist-detail ul {
+  margin-bottom: 0.5555555556rem;
 }
 .songlist-detail ul li {
   font-size: 0.0444444444rem;

@@ -1176,10 +1176,10 @@ punycode@^2.1.0:
   resolved "http://registry.npm.taobao.org/punycode/download/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha1-tYsBCsQMIsVldhbI0sLALHv0eew=
 
-qiniu-js@^2.5.3:
-  version "2.5.3"
-  resolved "http://registry.npm.taobao.org/qiniu-js/download/qiniu-js-2.5.3.tgz#986af7a92fcc7f04e80d5d992fd1f091699d0b1f"
-  integrity sha1-mGr3qS/MfwToDV2ZL9HwkWmdCx8=
+qiniu-js@^1.0.24:
+  version "1.0.24"
+  resolved "http://registry.npm.taobao.org/qiniu-js/download/qiniu-js-1.0.24.tgz#76826b4d93021de4e9b929c27f7b084a27b6e95c"
+  integrity sha1-doJrTZMCHeTpuSnCf3sISie26Vw=
 
 qiniu@^7.2.1:
   version "7.2.1"
@@ -1576,6 +1576,11 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+vconsole@^3.2.1:
+  version "3.2.1"
+  resolved "http://registry.npm.taobao.org/vconsole/download/vconsole-3.2.1.tgz#e38c1257af7767ec9a98fee72b1951eb0902c0bc"
+  integrity sha1-44wSV693Z+yamP7nKxlR6wkCwLw=
 
 verror@1.10.0:
   version "1.10.0"

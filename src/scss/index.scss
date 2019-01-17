@@ -22,87 +22,8 @@ body{
   font-size: px2rem(20px);
   color: white;
   background: black;
-  height: 84vh;
 }
-footer{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: px2rem(360px);
-  height: 16vh;
-  .player{
-    background-color: #202427;
-    display: flex;
-    justify-content: space-between;
-    span{
-      padding: px2rem(10px) px2rem(20px);
-    }
-    .like-selec{
-      .dislike{
-        display: none;
-      }
-      .like{
-        display: none;
-      }
-      .dislike.active{
-        display: inline;
-      }
-      .like.active{
-        display: inline;
-      }
-    }
-    .player-index{
-      flex: 1;
-      text-align: center;
-      margin: px2rem(15px) px2rem(20px) px2rem(10px);
-      color: white;
-      overflow: hidden;
-      white-space: nowrap;
-      font-size: px2rem(16px);
-      text-align: center;
-      span{
-        padding: 0;
-        transition: all 0.5s;
-      }
-    }
-    .footer-play{
-      .icon.start{
-        display: none;
-      }
-      .icon.pause{
-        display: none;
-      }
-      .icon.start.active{
-        display: inline;
-      }
-      .icon.pause.active{
-        display: inline;
-      }
-    }
-    
-  }
-  .menu{
-    background: #202427;
-    display: flex;
-    justify-content: space-around;
-    border-top: 1px solid black;
-    box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.75);
-    div{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: px2rem(10px);
-      color:#ADADAD;
-      span{
-        font-size: px2rem(10px);
-      }
-    }
-    div.active{
-      color: white;
-    }
-  }
-}
+
 section{
   background: black;
   font-size: px2rem(20px);
@@ -143,6 +64,7 @@ section{
   }
   .lastestSong{
     font-size: px2rem(14px);
+    margin-bottom: px2rem(30px);
     h1{
       padding: px2rem(10px);
       font-size: px2rem(25px);
@@ -174,31 +96,51 @@ section{
 }
 .search{
   display: none;
-  h1{
-    font-size: px2rem(40px);
-    text-align: center;
-    padding-top: px2rem(50px);
+  .top-search.active{
+    background: black;
+    transition: all 0.5s linear;
   }
-  form{
-    background-color: white;
-    margin: px2rem(20px);
-    border-radius: 5px;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    input{
-      background: inherit;
-      margin: px2rem(10px);
-      line-height: px2rem(25px);
-      font-size: px2rem(16px);
-      width: px2rem(200px);
-      border: none;
-      outline: none;
+  .top-search{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    transition: all 0.5s linear;
+    h1{
+      font-size: px2rem(40px);
+      text-align: center;
+      padding-top: px2rem(50px);
+      transition: all 0.5s linear;
+    }
+    h1.active{
+      padding-top: px2rem(30px);
+      transition: all 0.5s linear;
+
+    }
+    form{
+      background-color: white;
+      margin: px2rem(20px);
+      border-radius: 5px;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      input{
+        background: inherit;
+        margin: px2rem(10px);
+        line-height: px2rem(25px);
+        font-size: px2rem(16px);
+        width: px2rem(200px);
+        border: none;
+        outline: none;
+      }
     }
   }
   .class-recommend{
     display: block;
+    margin-top: px2rem(220px);
+    margin-bottom: px2rem(200px);
     h2{
       font-size: px2rem(20px);
       padding-left: px2rem(20px);
@@ -225,6 +167,9 @@ section{
     display: none;
   }
   .search-result{
+    margin-top: px2rem(200px);
+    margin-bottom: px2rem(200px);
+    overflow: auto;
     li{
       font-size: px2rem(16px);
       display: flex;
@@ -237,10 +182,14 @@ section{
   display: none;
   .topNarBar{
     display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
     justify-content: space-around;
     padding-top: px2rem(20px);
     align-items: flex-end;
-    
+    background: black;
     span{
       border-bottom: 3px solid transparent;
       letter-spacing: px2rem(2px);
@@ -255,6 +204,8 @@ section{
   .likeSong-page{
     display: none;
     ul{
+      margin-top: px2rem(60px);
+      margin-bottom: px2rem(200px);
       li{
         font-size: px2rem(16px);
         display: flex;
@@ -266,10 +217,12 @@ section{
   .art-page{
     display: none;
     ul{
+      margin-top: px2rem(60px);
       display: flex;
       justify-content: center;
       flex-direction: column;
       padding-top: px2rem(15px);
+      margin-bottom: px2rem(200px);
       li{
         display: flex;
         align-items: center;
@@ -288,10 +241,12 @@ section{
   .albums-page{
     display: none;
     ul{
+      margin-top: px2rem(60px);
       display: flex;
       justify-content: center;
       flex-direction: column;
       padding-top: px2rem(15px);
+      margin-bottom: px2rem(200px);
       li{
         display: flex;
         align-items: center;
@@ -423,5 +378,95 @@ section{
     right: 0;
     margin: auto;
     border-radius: 0;
+  }
+}
+footer{
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: px2rem(100px);
+  z-index: 20;
+  .player{
+    width: px2rem(360px);
+    height: 45%;
+    background-color: #202427;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    span{
+      padding: px2rem(10px) px2rem(20px);
+    }
+    .like-selec{
+      .dislike{
+        display: none;
+      }
+      .like{
+        display: none;
+      }
+      .dislike.active{
+        display: inline;
+      }
+      .like.active{
+        display: inline;
+      }
+    }
+    .player-index{
+      flex: 1;
+      text-align: center;
+      margin: px2rem(15px) px2rem(20px) px2rem(10px);
+      color: white;
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: px2rem(16px);
+      text-align: center;
+      span{
+        padding: 0;
+        transition: all 0.5s;
+      }
+    }
+    .footer-play{
+      .icon.start{
+        display: none;
+      }
+      .icon.pause{
+        display: none;
+      }
+      .icon.start.active{
+        display: inline;
+      }
+      .icon.pause.active{
+        display: inline;
+      }
+    }
+    
+  }
+  .menu{
+    background: #202427;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 55%;
+    justify-content: space-around;
+    border-top: 1px solid black;
+    box-shadow: 0px -1px 1px 0px rgba(0,0,0,0.75);
+    div{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: px2rem(10px);
+      color:#ADADAD;
+      span{
+        font-size: px2rem(10px);
+      }
+    }
+    div.active{
+      color: white;
+    }
   }
 }

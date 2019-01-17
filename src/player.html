@@ -75,10 +75,13 @@
   <script src="../vendor/jquery.min.js"></script>
   <script src="../vendor/av-min.js"></script>
   <script src="./js/av-init.js"></script>
+  <script src="../vendor/vconsole.min.js"></script>
   <script>
+    var vConsole = new VConsole();
+    console.log('Hello world');
     var isloop = true
     $('.top .back').on('click',()=>{
-      window.history.go(-1)
+      window.history.back(-1)
     })
 
     $('#like').on('click',()=>{
@@ -88,7 +91,6 @@
         let query1 = new AV.Query('Like')
         query1.equalTo('url', url);
         query1.find().then(song=>{
-          console.log(song.length)
           if(song.length === 0){
             let query = new AV.Query(hashlocalStorage['className']);
               query.get(hashlocalStorage['songId']).then( (song)=> {

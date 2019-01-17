@@ -45,82 +45,6 @@ body {
   font-size: 0.0555555556rem;
   color: white;
   background: black;
-  height: 84vh;
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 1rem;
-  height: 16vh;
-}
-footer .player {
-  background-color: #202427;
-  display: flex;
-  justify-content: space-between;
-}
-footer .player span {
-  padding: 0.0277777778rem 0.0555555556rem;
-}
-footer .player .like-selec .dislike {
-  display: none;
-}
-footer .player .like-selec .like {
-  display: none;
-}
-footer .player .like-selec .dislike.active {
-  display: inline;
-}
-footer .player .like-selec .like.active {
-  display: inline;
-}
-footer .player .player-index {
-  flex: 1;
-  text-align: center;
-  margin: 0.0416666667rem 0.0555555556rem 0.0277777778rem;
-  color: white;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 0.0444444444rem;
-  text-align: center;
-}
-footer .player .player-index span {
-  padding: 0;
-  transition: all 0.5s;
-}
-footer .player .footer-play .icon.start {
-  display: none;
-}
-footer .player .footer-play .icon.pause {
-  display: none;
-}
-footer .player .footer-play .icon.start.active {
-  display: inline;
-}
-footer .player .footer-play .icon.pause.active {
-  display: inline;
-}
-footer .menu {
-  background: #202427;
-  display: flex;
-  justify-content: space-around;
-  border-top: 1px solid black;
-  box-shadow: 0px -1px 1px 0px rgba(0, 0, 0, 0.75);
-}
-footer .menu div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0.0277777778rem;
-  color: #ADADAD;
-}
-footer .menu div span {
-  font-size: 0.0277777778rem;
-}
-footer .menu div.active {
-  color: white;
 }
 
 section {
@@ -165,6 +89,7 @@ section {
 }
 .home .lastestSong {
   font-size: 0.0388888889rem;
+  margin-bottom: 0.0833333333rem;
 }
 .home .lastestSong h1 {
   padding: 0.0277777778rem;
@@ -195,12 +120,29 @@ section {
 .search {
   display: none;
 }
-.search h1 {
+.search .top-search.active {
+  background: black;
+  transition: all 0.5s linear;
+}
+.search .top-search {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: all 0.5s linear;
+}
+.search .top-search h1 {
   font-size: 0.1111111111rem;
   text-align: center;
   padding-top: 0.1388888889rem;
+  transition: all 0.5s linear;
 }
-.search form {
+.search .top-search h1.active {
+  padding-top: 0.0833333333rem;
+  transition: all 0.5s linear;
+}
+.search .top-search form {
   background-color: white;
   margin: 0.0555555556rem;
   border-radius: 5px;
@@ -209,7 +151,7 @@ section {
   justify-content: center;
   align-items: center;
 }
-.search form input {
+.search .top-search form input {
   background: inherit;
   margin: 0.0277777778rem;
   line-height: 0.0694444444rem;
@@ -220,6 +162,8 @@ section {
 }
 .search .class-recommend {
   display: block;
+  margin-top: 0.6111111111rem;
+  margin-bottom: 0.5555555556rem;
 }
 .search .class-recommend h2 {
   font-size: 0.0555555556rem;
@@ -245,6 +189,11 @@ section {
 .search .class-recommend.hidden {
   display: none;
 }
+.search .search-result {
+  margin-top: 0.5555555556rem;
+  margin-bottom: 0.5555555556rem;
+  overflow: auto;
+}
 .search .search-result li {
   font-size: 0.0444444444rem;
   display: flex;
@@ -257,9 +206,14 @@ section {
 }
 .songList .topNarBar {
   display: flex;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
   justify-content: space-around;
   padding-top: 0.0555555556rem;
   align-items: flex-end;
+  background: black;
 }
 .songList .topNarBar span {
   border-bottom: 3px solid transparent;
@@ -274,6 +228,10 @@ section {
 .songList .likeSong-page {
   display: none;
 }
+.songList .likeSong-page ul {
+  margin-top: 0.1666666667rem;
+  margin-bottom: 0.5555555556rem;
+}
 .songList .likeSong-page ul li {
   font-size: 0.0444444444rem;
   display: flex;
@@ -284,10 +242,12 @@ section {
   display: none;
 }
 .songList .art-page ul {
+  margin-top: 0.1666666667rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
   padding-top: 0.0416666667rem;
+  margin-bottom: 0.5555555556rem;
 }
 .songList .art-page ul li {
   display: flex;
@@ -306,10 +266,12 @@ section {
   display: none;
 }
 .songList .albums-page ul {
+  margin-top: 0.1666666667rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
   padding-top: 0.0416666667rem;
+  margin-bottom: 0.5555555556rem;
 }
 .songList .albums-page ul li {
   display: flex;
@@ -442,6 +404,91 @@ section {
     margin: auto;
     border-radius: 0;
   }
+}
+footer {
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0.2777777778rem;
+  z-index: 20;
+}
+footer .player {
+  width: 1rem;
+  height: 45%;
+  background-color: #202427;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+footer .player span {
+  padding: 0.0277777778rem 0.0555555556rem;
+}
+footer .player .like-selec .dislike {
+  display: none;
+}
+footer .player .like-selec .like {
+  display: none;
+}
+footer .player .like-selec .dislike.active {
+  display: inline;
+}
+footer .player .like-selec .like.active {
+  display: inline;
+}
+footer .player .player-index {
+  flex: 1;
+  text-align: center;
+  margin: 0.0416666667rem 0.0555555556rem 0.0277777778rem;
+  color: white;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 0.0444444444rem;
+  text-align: center;
+}
+footer .player .player-index span {
+  padding: 0;
+  transition: all 0.5s;
+}
+footer .player .footer-play .icon.start {
+  display: none;
+}
+footer .player .footer-play .icon.pause {
+  display: none;
+}
+footer .player .footer-play .icon.start.active {
+  display: inline;
+}
+footer .player .footer-play .icon.pause.active {
+  display: inline;
+}
+footer .menu {
+  background: #202427;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 55%;
+  justify-content: space-around;
+  border-top: 1px solid black;
+  box-shadow: 0px -1px 1px 0px rgba(0, 0, 0, 0.75);
+}
+footer .menu div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.0277777778rem;
+  color: #ADADAD;
+}
+footer .menu div span {
+  font-size: 0.0277777778rem;
+}
+footer .menu div.active {
+  color: white;
 }
 
 /*# sourceMappingURL=index.css.map */

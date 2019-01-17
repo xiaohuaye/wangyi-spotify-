@@ -55,9 +55,9 @@ body{
   }
   .point{
     position: absolute;
-    width: px2rem(90px);
+    width: px2rem(80px);
     z-index: 4;
-    right: px2rem(100px);
+    right: px2rem(130px);
     top: px2rem(-10px);
     transition: all 0.4s linear;
   }
@@ -82,22 +82,22 @@ body{
     }
   }
   .pan{
-    width: px2rem(300px);
-    height: px2rem(300px);
+    width: px2rem(250px);
+    height: px2rem(250px);
     margin: px2rem(14px) auto px2rem(20px);
     position: relative;
     border-radius: 50%;
     overflow: hidden;
     .out{
-      width: px2rem(300px);
-      height: px2rem(300px);
+      width: px2rem(250px);
+      height: px2rem(250px);
       position: absolute;
       left: 0;
       top: 0;
     }
     .light{
-      width: px2rem(300px);
-      height: px2rem(300px);
+      width: px2rem(250px);
+      height: px2rem(250px);
       position: absolute;
       left: 0;
       top: 0;
@@ -116,8 +116,8 @@ body{
     }
     .default{
       position: absolute;
-      width: px2rem(190px);
-      height: px2rem(190px);
+      width: px2rem(160px);
+      height: px2rem(160px);
       left: 50%;
       right: 50%;
       transform: translate(-50%,29%);

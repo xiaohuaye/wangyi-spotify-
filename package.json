@@ -5,11 +5,12 @@
     "node-sass": "^4.11.0",
     "plupload": "^2.3.6",
     "qiniu": "^7.2.1",
-    "qiniu-js": "^1.0.24"
+    "qiniu-js": "^1.0.24",
+    "vconsole": "^3.2.1"
   },
   "name": "wangyi-phone",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "sign.html",
   "author": "xiaohuaye <908347816@qq.com>",
   "license": "MIT",
   "repository": "git@github.com:xiaohuaye/wangyi-spotify-.git"

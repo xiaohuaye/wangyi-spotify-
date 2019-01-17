@@ -75,9 +75,9 @@ body .lry {
 }
 body .point {
   position: absolute;
-  width: 0.25rem;
+  width: 0.2222222222rem;
   z-index: 4;
-  right: 0.2777777778rem;
+  right: 0.3611111111rem;
   top: -0.0277777778rem;
   transition: all 0.4s linear;
 }
@@ -102,23 +102,23 @@ body .top .back {
   font-size: 0.0555555556rem;
 }
 body .pan {
-  width: 0.8333333333rem;
-  height: 0.8333333333rem;
+  width: 0.6944444444rem;
+  height: 0.6944444444rem;
   margin: 0.0388888889rem auto 0.0555555556rem;
   position: relative;
   border-radius: 50%;
   overflow: hidden;
 }
 body .pan .out {
-  width: 0.8333333333rem;
-  height: 0.8333333333rem;
+  width: 0.6944444444rem;
+  height: 0.6944444444rem;
   position: absolute;
   left: 0;
   top: 0;
 }
 body .pan .light {
-  width: 0.8333333333rem;
-  height: 0.8333333333rem;
+  width: 0.6944444444rem;
+  height: 0.6944444444rem;
   position: absolute;
   left: 0;
   top: 0;
@@ -137,8 +137,8 @@ body .pan .light.active {
 }
 body .pan .default {
   position: absolute;
-  width: 0.5277777778rem;
-  height: 0.5277777778rem;
+  width: 0.4444444444rem;
+  height: 0.4444444444rem;
   left: 50%;
   right: 50%;
   transform: translate(-50%, 29%);

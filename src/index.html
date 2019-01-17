@@ -41,13 +41,16 @@
 
 
   <section class="search">
-    <h1>Search</h1>
-    <form>
-      <span></span><svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-search"></use>
-      </svg></span>
-      <input type="text" placeholder="请输入艺术家，歌名">
-    </form>
+    <div class="top-search">
+        <h1>Search</h1>
+        <form>
+          <span></span><svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-search"></use>
+          </svg></span>
+          <input type="text" placeholder="请输入艺术家，歌名">
+        </form>
+        <div class="mark--1"></div>
+    </div>
     <div class="class-recommend">
       <h2>浏览全部</h2>
       <ul>
@@ -172,10 +175,14 @@
 <script src="../vendor/jquery.min.js"></script>
 <script src="../vendor/av-min.js"></script>
 <script src="./js/av-init.js"></script>
+<script src="../vendor/vconsole.min.js"></script>
 
 <script>
   init()
 function init(){
+  // 初始化
+  var vConsole = new VConsole();
+  console.log('Hello world');
   //设置触摸效果
   $('body').on('touchstart','.site-song',handleStart)
   $('body').on('touchend','.site-song',handleEnd)
@@ -202,49 +209,11 @@ function init(){
   }
 
   //从本地获取上一次歌曲的信息
-  let Local = localStorage.getItem('wangyimusic')
-  if(Local){
-    console.log(Local)
-      let hashlocalStorage = JSON.parse(localStorage.getItem('wangyimusic') || '')
-      let query = new AV.Query(hashlocalStorage['className'])
-      query.get(hashlocalStorage['songId']).then(
-        song=>{
-          let name = song.attributes.name.split('.mp')
-          let singer = song.attributes.singer
-          let url = song.attributes.url
-          let Aurl = `./player.html?className=${hashlocalStorage['className']}&&songId=${hashlocalStorage['songId']}`
-          $('.player-index>span').text(`${name[0]}--${singer}`)
-          $('.player audio').attr('src',url)
-          $('.player a').attr('href',Aurl)
-        }
-      ).then(()=>{
-        let text = $('.player-index>span').text()
-        if(text){
-          let hashlocalStorage = JSON.parse(localStorage.getItem('wangyimusic'))
-          let url = $('.player audio').attr('src')
-          let query1 = new AV.Query('Like')
-          query1.equalTo('url', url);
-          query1.find().then(song=>{
-            if(song.length !== 0){
-              $('.like-selec>.like').addClass('active').siblings().removeClass('active')
-            }else{
-              $('.like-selec>.dislike').addClass('active').siblings().removeClass('active')
-            }
-          })
-        }  
-      }
-    )
-  }
-  
+  writeSongToPlayer()
 }
-  
-
 
   $('.songlist-detail').on('scroll',(e)=>{
     topSonglistDetailChange = $('.songlist-detail #songlist-d-img').offset()
-    console.log(topSonglistDetail.top)
-    console.log(topSonglistDetailChange.top)
-
     if(topSonglistDetail.top >= (topSonglistDetailChange.top + 10)){
       $('.songlist-detail nav').css('background-color','#191911')
     }
@@ -288,10 +257,44 @@ function init(){
       (error)=>{console.log(error)
     })
 
+    //点击菜单栏
   $('.menu>div').on('click',(e)=>{
     $(e.currentTarget).addClass('active').siblings().removeClass('active')
     let index = $('.menu>div').index(e.currentTarget)
     let page = $('section')
+    if(index === 1){
+      let topSearch 
+      let topForm
+      $('.search').on('scroll',()=>{
+        topForm = $('.search .mark--1').offset().top
+        topSearch = $('.search h2').offset().top
+        if(topForm > topSearch){
+          setTimeout(()=>{
+            $('.search h1').addClass('active')
+            $('.search .top-search').addClass('active')
+          },500)
+        }else{
+          setTimeout(()=>{
+            $('.search h1').removeClass('active')
+          $('.search .top-search').removeClass('active')
+          },500)
+          
+        }
+      })
+      $('form input').on('focus',()=>{
+        $('footer').css('visibility','hidden')
+      })
+      console.log($('.search'))
+      $('.search').on('scroll',()=>{
+        $('form input').blur()
+        console.log(1)
+      })
+      $('form input').on('blur',()=>{
+        $('footer').css('visibility','visible')
+      })
+      
+    
+    }
     $(page[index]).addClass('active').siblings().removeClass('active')
     $('.class-recommend').removeClass('hidden')
     $('#search-result').empty()
@@ -393,7 +396,7 @@ var topSonglistDetail
     }
     localStorage.setItem('wangyimusic',JSON.stringify(hash))
     let url = `./player.html?className=${hash['className']}&&songId=${hash['songId']}`
-    console.log(url)
+    writeSongToPlayer()
     window.location.href = url
   })
   
@@ -413,9 +416,11 @@ $('.songList>.topNarBar>span').on('click',(e)=>{
   let index = $(e.currentTarget).index()
   let div = $('.songList>div')[index+1]
   $(div).addClass('active').siblings().removeClass('active')
+  console.log(index)
   if(index === 2){
     render()
   }
+  
 })
 
 $('#like').on('click',()=>{
@@ -498,7 +503,6 @@ function search(className,value){
             songs=>{
               if(songs.length !== 0){ //如果找到
                 songs.map(song=>{
-                  console.log(song)
                   let name = song.attributes.name.split('.mp') //name[0]就是歌名
                   let $li = $('<li class="site-song"></li>').attr(
                     {
@@ -516,6 +520,41 @@ function search(className,value){
         
       })
     })
+}
+
+function writeSongToPlayer(){
+  let Local = localStorage.getItem('wangyimusic')
+  if(Local){
+      let hashlocalStorage = JSON.parse(localStorage.getItem('wangyimusic') || '')
+      let query = new AV.Query(hashlocalStorage['className'])
+      query.get(hashlocalStorage['songId']).then(
+        song=>{
+          let name = song.attributes.name.split('.mp')
+          let singer = song.attributes.singer
+          let url = song.attributes.url
+          let Aurl = `./player.html?className=${hashlocalStorage['className']}&&songId=${hashlocalStorage['songId']}`
+          $('.player-index>span').text(`${name[0]}--${singer}`)
+          $('.player audio').attr('src',url)
+          $('.player a').attr('href',Aurl)
+        }
+      ).then(()=>{
+        let text = $('.player-index>span').text()
+        if(text){
+          let hashlocalStorage = JSON.parse(localStorage.getItem('wangyimusic'))
+          let url = $('.player audio').attr('src')
+          let query1 = new AV.Query('Like')
+          query1.equalTo('url', url);
+          query1.find().then(song=>{
+            if(song.length !== 0){
+              $('.like-selec>.like').addClass('active').siblings().removeClass('active')
+            }else{
+              $('.like-selec>.dislike').addClass('active').siblings().removeClass('active')
+            }
+          })
+        }  
+      }
+    )
+  }
 }
 </script>
 </html>

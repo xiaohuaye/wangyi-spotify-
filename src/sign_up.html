@@ -51,15 +51,6 @@
             alert(JSON.stringify(error["rawMessage"]))
           })
       }
-      
-      // $.post("sign_up", hash).then(
-      //   () => {
-      //     console.log("success");
-      //   },
-      //   () => {
-      //     console.log("error");
-      //   }
-      // );
     });
 
     $('.signUp>input[type=submit]').on('touchstart',handleStart)
@@ -70,16 +61,5 @@
     function handleEnd(e){
       $('.signUp>input[type=submit]').removeClass('active')      
     }
-    //////
-
-    // var TestObject = AV.Object.extend("TestObject");
-    // var testObject = new TestObject();
-    // testObject
-    //   .save({
-    //     words: "Hello World!"
-    //   })
-    //   .then(function(object) {
-    //     alert("LeanCloud Rocks!");
-    //   });
   </script>
 </html>

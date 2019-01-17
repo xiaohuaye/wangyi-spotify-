@@ -288,10 +288,8 @@ function init(){
       $('form input').on('focus',()=>{
         $('footer').css('visibility','hidden')
       })
-      console.log($('.search'))
       $('.search').on('scroll',()=>{
         $('form input').blur()
-        console.log(1)
       })
       $('form input').on('blur',()=>{
         $('footer').css('visibility','visible')
@@ -381,7 +379,6 @@ $('.songList>.topNarBar>span').on('click',(e)=>{
   let index = $(e.currentTarget).index()
   let div = $('.songList>div')[index+1]
   $(div).addClass('active').siblings().removeClass('active')
-  console.log(index)
   if(index === 2){
     render()
   }

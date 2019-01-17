@@ -85,7 +85,6 @@
     })
 
     $('#like').on('click',()=>{
-      console.log(1)
         let hashlocalStorage = JSON.parse(localStorage.getItem('wangyimusic'))
         let url = $('audio').attr('src')
         let query1 = new AV.Query('Like')
@@ -193,7 +192,6 @@
           isloop = false
           $('.danqu').removeClass('active')
         }else{
-          console.log(1)
           let audio = $('audio')[0]
           $($(audio)[0]).attr('loop','true')
           isloop = true
@@ -226,9 +224,7 @@
       return theRequest;
     }
     $($('body audio')[0]).on('ended',()=>{
-      console.log(isloop)
       if(!isloop){
-        console.log(1)
         $('audio')[0].currentTime = 0
         $('#pause').click()
       }

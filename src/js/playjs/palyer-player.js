@@ -51,6 +51,18 @@ function playermodel(){
     },
     bindEvent() {
       $("#player #like").on("click", () => {
+        let string = $('#player .like-selec .dislike').css('display')
+        if(string === 'inline'){
+          $(".like-selec>.like")
+            .addClass("active")
+            .siblings()
+            .removeClass("active");
+        }else{
+          $(".like-selec>.dislike")
+            .addClass("active")
+            .siblings()
+            .removeClass("active");
+        }
         let hashlocalStorage = JSON.parse(localStorage.getItem("wangyimusic"));
         let url = $("audio").attr("src");
         let query1 = new AV.Query("Like");
@@ -69,10 +81,6 @@ function playermodel(){
                   like.set("url", song.attributes.url);
                   like.save().then(
                     song => {
-                      $(".like-selec>.like")
-                        .addClass("active")
-                        .siblings()
-                        .removeClass("active");
                       render();
                     },
                     error => {
@@ -87,12 +95,7 @@ function playermodel(){
             } else {
               let todo = AV.Object.createWithoutData("Like", song[0].id);
               todo.destroy().then(
-                success => {
-                  $(".like-selec>.dislike")
-                    .addClass("active")
-                    .siblings()
-                    .removeClass("active");
-                  console.log(success);
+                success => {       
                   render();
                 },
                 error => {

@@ -70,6 +70,7 @@
     bindEvent() {
       $(".search form").on("submit", e => {
         e.preventDefault();
+        $('.site-loading').addClass('active')
         $(".class-recommend").addClass("hidden");
         $("#search-result").empty();
         let value = $(".search input")[0].value;
@@ -95,7 +96,9 @@
                 });
               }
             }
-          );
+          ).then(()=>{
+            $('.site-loading').removeClass('active')
+          })
         });
       });
     }

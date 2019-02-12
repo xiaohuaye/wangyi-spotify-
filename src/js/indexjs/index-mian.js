@@ -1,36 +1,35 @@
 var taggle = false;
 var time;
 var pageNumber;
-var listId
+var listId;
 {
   let view = {};
   let model = {
     data: {
-      hashlocalStorage:null,
-      currentSongName:null,
-      currentSongSinger:null,
-      currentSongURL:null,
-      currentSongAURL:null
-
+      hashlocalStorage: null,
+      currentSongName: null,
+      currentSongSinger: null,
+      currentSongURL: null,
+      currentSongAURL: null
     },
-    getSongDetail(className,songId){
+    getSongDetail(className, songId) {
       let query = new AV.Query(className);
-       return query.get(songId)
+      return query.get(songId);
     },
-    equalToURL(url){
+    equalToURL(url) {
       let query = new AV.Query("Like");
       query.equalTo("url", url);
-      return query.find()
+      return query.find();
     }
   };
   let controller = {
     init(view, model) {
       this.view = view;
       this.model = model;
-      this.writeSongToPlayer();//从本地获取上一次歌曲的信息
-      this.touchPhone() //设置触摸效果
-      this.bindEvent()
-      this.play()
+      this.writeSongToPlayer(); //从本地获取上一次歌曲的信息
+      this.touchPhone(); //设置触摸效果
+      this.bindEvent();
+      this.play();
     },
     touchPhone() {
       // var vConsole = new VConsole();
@@ -38,7 +37,7 @@ var listId
       $("body").on("touchstart", ".site-song", this.handleStart);
       $("body").on("touchend", ".site-song", this.handleEnd);
     },
-    bindEvent(){
+    bindEvent() {
       $("body").on("click", ".site-songlist", e => {
         for (let i = 0; i < 3; i++) {
           let string = $("section")[i].className.split(" ");
@@ -51,7 +50,7 @@ var listId
         let section = $("section");
         $(section[3]).addClass("active");
         listId = e.currentTarget.attributes[1].nodeValue;
-        songlistDetail()
+        songlistDetail();
       });
       $("body").on("click", ".site-song", e => {
         let hash = {
@@ -63,14 +62,17 @@ var listId
           hash["songId"]
         }`;
         this.writeSongToPlayer();
+        $('.site-loading').addClass('active')
         let audio = $("audio");
         if (!taggle) {
           setTimeout(() => {
+            $('.site-loading').removeClass('active')
             $("#footer-play").click();
             audio[0].play();
           }, 2000);
         } else {
           setTimeout(() => {
+            $('.site-loading').removeClass('active')
             audio[0].play();
           }, 2000);
         }
@@ -120,7 +122,22 @@ var listId
       $("#like").on("click", () => {
         let text = $(".player-index>span").text();
         if (text) {
-          let hashlocalStorage = JSON.parse(localStorage.getItem("wangyimusic"));
+          let string = $(".like-selec .dislike").css("display");
+          console.log(string)
+          if (string === "inline") {
+            $(".like-selec>.like")
+              .addClass("active")
+              .siblings()
+              .removeClass("active");
+          } else {
+            $(".like-selec>.dislike")
+              .addClass("active")
+              .siblings()
+              .removeClass("active");
+          }
+          let hashlocalStorage = JSON.parse(
+            localStorage.getItem("wangyimusic")
+          );
           let url = $(".player audio").attr("src");
           let query1 = new AV.Query("Like");
           query1.equalTo("url", url);
@@ -138,10 +155,6 @@ var listId
                     like.set("url", song.attributes.url);
                     like.save().then(
                       song => {
-                        $(".like-selec>.like")
-                          .addClass("active")
-                          .siblings()
-                          .removeClass("active");
                         render();
                       },
                       error => {
@@ -157,10 +170,6 @@ var listId
                 let todo = AV.Object.createWithoutData("Like", song[0].id);
                 todo.destroy().then(
                   () => {
-                    $(".like-selec>.dislike")
-                      .addClass("active")
-                      .siblings()
-                      .removeClass("active");
                     render();
                   },
                   error => {
@@ -191,8 +200,11 @@ var listId
         this.model.data.hashlocalStorage = JSON.parse(
           localStorage.getItem("wangyimusic") || ""
         );
-        this.model.getSongDetail(this.model.data.hashlocalStorage["className"],
-        this.model.data.hashlocalStorage["songId"])
+        this.model
+          .getSongDetail(
+            this.model.data.hashlocalStorage["className"],
+            this.model.data.hashlocalStorage["songId"]
+          )
           .then(song => {
             this.model.currentSongName = song.attributes.name.split(".mp");
             this.model.currentSongSinger = song.attributes.singer;
@@ -200,14 +212,17 @@ var listId
             this.model.currentSongAURL = `./player.html?className=${
               this.model.data.hashlocalStorage["className"]
             }&&songId=${this.model.data.hashlocalStorage["songId"]}`;
-            $(".player-index>span").text(`${this.model.currentSongName[0]}--${this.model.currentSongSinger}`);
+            $(".player-index>span").text(
+              `${this.model.currentSongName[0]}--${
+                this.model.currentSongSinger
+              }`
+            );
             $(".player audio").attr("src", this.model.currentSongURL);
             $(".player a").attr("href", this.model.currentSongAURL);
           })
           .then(() => {
             if (this.model.currentSongName) {
-              this.model.equalToURL(this.model.currentSongURL)
-              .then(song => {
+              this.model.equalToURL(this.model.currentSongURL).then(song => {
                 if (song.length !== 0) {
                   $(".like-selec>.like")
                     .addClass("active")
@@ -221,7 +236,10 @@ var listId
                 }
               });
             }
+            this.removeloading()
           });
+      }else{
+        this.removeloading()
       }
     },
     play() {
@@ -270,22 +288,10 @@ var listId
           }
         }
       });
+    },
+    removeloading(){
+      $('.site-loading').removeClass('active')
     }
-    
   };
   controller.init(view, model);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

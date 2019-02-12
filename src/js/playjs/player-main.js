@@ -97,6 +97,7 @@ function playAndPause() {
           currentTime = audio[0].currentTime;
         },1000)
         setTimeout(()=>{
+          $('#player .loading').removeClass('active')
           playermodel()
         },1000)
       }),

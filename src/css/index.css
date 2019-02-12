@@ -46,6 +46,27 @@ body {
   color: white;
   background: black;
 }
+body .site-loading {
+  display: none;
+}
+body .site-loading.active {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #202427;
+}
+body .site-loading.active .loading {
+  display: inline;
+  color: white;
+  animation: 1s animal infinite;
+  font-size: 0.0833333333rem;
+}
 
 section {
   background: black;
@@ -191,7 +212,7 @@ section {
 }
 .search .search-result {
   margin-top: 0.5555555556rem;
-  margin-bottom: 0.5555555556rem;
+  margin-bottom: 0.2777777778rem;
   overflow: auto;
 }
 .search .search-result li {
@@ -247,7 +268,7 @@ section {
   justify-content: center;
   flex-direction: column;
   padding-top: 0.0416666667rem;
-  margin-bottom: 0.5555555556rem;
+  margin-bottom: 0.0277777778rem;
 }
 .songList .art-page ul li {
   display: flex;
@@ -514,6 +535,15 @@ footer .menu div span {
 }
 footer .menu div.active {
   color: white;
+}
+
+@keyframes animal {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /*# sourceMappingURL=index.css.map */

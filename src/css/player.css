@@ -127,14 +127,6 @@ body .pan .light {
 body .pan .light.active {
   animation: animal 10s infinite linear;
 }
-@keyframes animal {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 body .pan .default {
   position: absolute;
   width: 0.4444444444rem;
@@ -164,6 +156,23 @@ body .player {
   bottom: 0;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+body .player .loading {
+  display: none;
+}
+body .player .loading.active {
+  font-size: 0.0833333333rem;
+  margin-bottom: 0.0833333333rem;
+  display: inline-block;
+  animation: 1s change infinite;
+}
+@keyframes change {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 body .player .contral {
   display: flex;
@@ -230,6 +239,15 @@ body .player .passBar .pass-wrapper .pass {
   top: 0;
   background: black;
   border-radius: 3px;
+}
+
+@keyframes animal {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /*# sourceMappingURL=player.css.map */

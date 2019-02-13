@@ -122,9 +122,10 @@
       let data = {};
       //替换脚本
       // let string1 = this.view.$el.find(`input[name = "url"]`).val()
-      // string1 = string1.replace('pjxo7l586','pldcmrsc6')
+      // string1 = string1.replace('pldcmrsc6.bkt.clouddn.com','abc.xiaohuaye.xyz')
       // console.log(string1)
       // this.view.$el.find(`input[name = "url"]`).val(string1)
+
       need.map(string => {
         data[string] = this.view.$el.find(`input[name = "${string}"]`).val();
       });

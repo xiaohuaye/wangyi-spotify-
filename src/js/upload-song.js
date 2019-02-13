@@ -20,7 +20,7 @@
         browse_button: this.view.find("#btnUpload"), //上传选择的点选按钮，**必需**
         uptoken: "",
         uptoken_url: jQuery.parseJSON(JSON.stringify("http://localhost:8888/uptoken")),
-        domain: "http://pldcmrsc6.bkt.clouddn.com", //bucket 域名，下载资源时用到，**必需**
+        domain: "http://abc.xiaohuaye.xyz", //bucket 域名，下载资源时用到，**必需**
         get_new_uptoken: false, //设置上传文件的时候是否每次都重新获取新的token
         max_file_size: "20mb", //最大文件体积限制
         dragdrop: true, //开启可拖曳上传

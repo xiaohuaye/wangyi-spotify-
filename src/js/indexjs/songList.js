@@ -10,23 +10,23 @@
     <div class="art-page active">
       <ul>
         <li class="site-songlist" data-songListId="zl67974fca6770">
-          <img src="http://pldcmrsc6.bkt.clouddn.com/20161209164303152140.jpg" alt="">
+          <img src="http://abc.xiaohuaye.xyz/20161209164303152140.jpg" alt="">
           <span>林俊杰</span>
         </li>
         <li class="site-songlist" data-songListId="zl859b4e4b8c26">
-          <img src="http://pldcmrsc6.bkt.clouddn.com/4140d2c8-2f68-4825-8718-fdbc80282693.jpg" alt="">
+          <img src="http://abc.xiaohuaye.xyz/4140d2c8-2f68-4825-8718-fdbc80282693.jpg" alt="">
           <span>薛之谦</span>
         </li>
         <li class="site-songlist" data-songListId="zl521d97f3">
-          <img src="http://pldcmrsc6.bkt.clouddn.com/8c1a694ba72143a7a1199c09469f4f2f.jpeg" alt="">
+          <img src="http://abc.xiaohuaye.xyz/8c1a694ba72143a7a1199c09469f4f2f.jpeg" alt="">
           <span>初音</span>
         </li>
         <li class="site-songlist" data-songListId="zl5b5971d559ff">
-          <img src="http://pldcmrsc6.bkt.clouddn.com/T001R300x300M000001pWERg3vFgg8.jpg" alt="">
+          <img src="http://abc.xiaohuaye.xyz/T001R300x300M000001pWERg3vFgg8.jpg" alt="">
           <span>孙燕姿</span>
         </li>
         <li class="site-songlist" data-songListId="zl90937d2b68cb">
-          <img src="http://pldcmrsc6.bkt.clouddn.com/www.nwlg.net_2014531815.jpg" alt="">
+          <img src="http://abc.xiaohuaye.xyz/www.nwlg.net_2014531815.jpg" alt="">
           <span>邓紫棋</span>
         </li>
       </ul>
@@ -34,7 +34,7 @@
     <div class="albums-page">
       <ul>
         <li class="site-songlist" data-songListId="zl7fa4661f">
-            <img src="http://pldcmrsc6.bkt.clouddn.com/T001R300x300M000001XVWeA0mSQ0W.jpg" alt="">
+            <img src="http://abc.xiaohuaye.xyz/T001R300x300M000001XVWeA0mSQ0W.jpg" alt="">
             <span>群星演唱</span>
         </li>
       </ul>
